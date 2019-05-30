@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Markdown使用手册</title>
+      <link href="/2019/05/29/Markdown%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/"/>
+      <url>/2019/05/29/Markdown%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</url>
+      
+        <content type="html"><![CDATA[<p>Markdown 语法介绍<br>Markdown 是一种轻量级标记语言，让写作者专注于写作而不用关注样式。Coding 的许多版块均采用了 Markdown 语法，比如冒泡、讨论、Pull Request 等。</p><a id="more"></a><p>标题<br>用 Markdown 书写时，只需要在文本前面加上『# 』即可创建一级标题。同理，创建二级标题、三级标题等只需要增加『# 』个数即可，Markdown 共支持六级标题。如下所示：</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日常需要 </category>
+          
+          <category> 文档编写 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Markdown </tag>
+            
+            <tag> 文档编写 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
