@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Markdown使用手册（持续更新） | Anges Zhu</title>
+  
+  
+  <meta name="description" content="Markdown文档的基本语法">
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/css/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class="cover post half">
+      
+        
+  <h1 class="title">Anges's Garden</h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder>
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class="menu navgation">
+  <ul class="h-list">
+    
+      
+        <li>
+          <a class="nav home" href="/" id="home">
+            <i class="fas fa-rss fa-fw"></i>&nbsp;博文
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/archives/" id="archives">
+            <i class="fas fa-archive fa-fw"></i>&nbsp;归档
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/" id="categories">
+            <i class="fas fa-code-branch fa-fw"></i>&nbsp;分类
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/friends/" rel="nofollow" id="friends">
+            <i class="fas fa-link fa-fw"></i>&nbsp;友链
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/about/" rel="nofollow" id="about">
+            <i class="fas fa-info-circle fa-fw"></i>&nbsp;关于
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class="wrapper">
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href="/">
+        
+          Anges Zhu
+        
+      </a>
+			<div class="menu navgation">
+				<ul class="h-list">
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/" id="home">
+									<i class="fas fa-grin fa-fw"></i>&nbsp;博文
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/" rel="nofollow" id="categories">
+									<i class="fas fa-folder-open fa-fw"></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/tags/" rel="nofollow" id="tags">
+									<i class="fas fa-hashtag fa-fw"></i>&nbsp;标签
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/archives/" rel="nofollow" id="archives">
+									<i class="fas fa-archive fa-fw"></i>&nbsp;归档
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search">
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class="switcher h-list">
+				
+					<li class="s-search"><a class="fas fa-search fa-fw" href="javascript:void(0)"></a></li>
+				
+				<li class="s-menu"><a class="fas fa-bars fa-fw" href="javascript:void(0)"></a></li>
+			</ul>
+		</div>
+
+		<div class="nav-sub container container--flex">
+			<a class="logo flat-box"></a>
+			<ul class="switcher h-list">
+				<li class="s-comment"><a class="flat-btn fas fa-comments fa-fw" href="javascript:void(0)"></a></li>
+        
+          <li class="s-toc"><a class="flat-btn fas fa-list fa-fw" href="javascript:void(0)"></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/" id="home">
+								<i class="fas fa-clock fa-fw"></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/" rel="nofollow" id="archives">
+								<i class="fas fa-archive fa-fw"></i>&nbsp;文章归档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/projects/" id="projects">
+								<i class="fas fa-code-branch fa-fw"></i>&nbsp;开源项目
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/friends/" rel="nofollow" id="friends">
+								<i class="fas fa-link fa-fw"></i>&nbsp;我的友链
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="https://xaoxuu.com/wiki/material-x/" rel="nofollow" id="https:xaoxuu.comwikimaterial-x">
+								<i class="fas fa-book fa-fw"></i>&nbsp;主题文档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/about/" rel="nofollow" id="about">
+								<i class="fas fa-info-circle fa-fw"></i>&nbsp;关于小站
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class="l_main">
+  
+
+  
+    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2019/05/29/Markdown-text/">
+        Markdown使用手册（持续更新）
+      </a>
+    </h1>
+  
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>Anges Zhu</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-05-29</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/日常需要/文档编写/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>日常需要&nbsp;/&nbsp;文档编写</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class="notlink">
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          <h2 id="Markdown简介"><a href="#Markdown简介" class="headerlink" title="Markdown简介"></a>Markdown简介</h2><blockquote>
+<p>Markdown是一种纯文本格式的标记语言。通过简单的标记语法，它可以使普通文本内容具有一定的格式。</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="它的优缺点"><a href="#它的优缺点" class="headerlink" title="它的优缺点"></a>它的优缺点</h3><p>优点：</p>
+<blockquote>
+<p>1、因为是纯文本，所以只要支持Markdown的地方都能获得一样的编辑效果，可以让作者摆脱排版的困扰，专心写作。<br>2、操作简单。比如:WYSIWYG编辑时标记个标题，先选中内容，再点击导航栏的标题按钮，选择几级标题。要三个步骤。而Markdown只需要在标题内容前加#即可</p>
+</blockquote>
+<p>缺点：</p>
+<blockquote>
+<p>1、需要记一些语法（当然，是很简单。五分钟学会）。<br>2、有些平台不支持Markdown编辑模式。</p>
+</blockquote>
+<hr>
+<h2 id="Markdown语法"><a href="#Markdown语法" class="headerlink" title="Markdown语法"></a>Markdown语法</h2><hr>
+<h4 id="一、标题"><a href="#一、标题" class="headerlink" title="一、标题"></a>一、标题</h4><p>在想要设置为标题的文字前面加符号#来表示<br>一个#是一级标题，二个#是二级标题，以此类推。支持六级标题。<br>注：标准语法一般在#后跟个空格再写文字。<br>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 这是一级标题</span><br><span class="line">## 这是二级标题</span><br><span class="line">### 这是三级标题</span><br><span class="line">#### 这是四级标题</span><br><span class="line">##### 这是五级标题</span><br><span class="line">###### 这是六级标题</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<h1 id="这是一级标题"><a href="#这是一级标题" class="headerlink" title="这是一级标题"></a>这是一级标题</h1><h2 id="这是二级标题"><a href="#这是二级标题" class="headerlink" title="这是二级标题"></a>这是二级标题</h2><h3 id="这是三级标题"><a href="#这是三级标题" class="headerlink" title="这是三级标题"></a>这是三级标题</h3><h4 id="这是四级标题"><a href="#这是四级标题" class="headerlink" title="这是四级标题"></a>这是四级标题</h4><h5 id="这是五级标题"><a href="#这是五级标题" class="headerlink" title="这是五级标题"></a>这是五级标题</h5><h6 id="这是六级标题"><a href="#这是六级标题" class="headerlink" title="这是六级标题"></a>这是六级标题</h6><p><img src="//yoursite.com/2019/05/29/Markdown-text/title.png" alt="标题示例"></p>
+<hr>
+<h4 id="二、字体"><a href="#二、字体" class="headerlink" title="二、字体"></a>二、字体</h4><ul>
+<li>加粗</li>
+</ul>
+<p>要加粗的文字左右分别用两个’*’号包起来</p>
+<ul>
+<li>斜体</li>
+</ul>
+<p>要倾斜的文字左右分别用一个’*’号包起来</p>
+<ul>
+<li>斜体加粗</li>
+</ul>
+<p>要倾斜和加粗的文字左右分别用三个’*’号包起来</p>
+<ul>
+<li>删除线</li>
+</ul>
+<p>要加删除线的文字左右分别用两个’~~’号包起来</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">**这是加粗的文字**</span><br><span class="line">*这是倾斜的文字*</span><br><span class="line">***这是斜体加粗的文字***</span><br><span class="line">~~这是加删除线的文字~~</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><strong>这是加粗的文字</strong><br><em>这是倾斜的文字</em><br><strong><em>这是斜体加粗的文字</em></strong><br><del>这是加删除线的文字</del></p>
+<h4 id="三、引用"><a href="#三、引用" class="headerlink" title="三、引用"></a>三、引用</h4><p>在引用的文字前加&gt;即可。引用也可以嵌套，如加两个&gt;&gt;三个&gt;&gt;&gt;<br>n个…<br>貌似可以一直加下去，但没神马卵用<br>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;这是引用的内容</span><br><span class="line">&gt;&gt;这是引用的内容</span><br><span class="line">&gt;&gt;</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;这是引用的内容</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<blockquote>
+<p>这是引用的内容</p>
+<blockquote>
+<p>这是引用的内容</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>这是引用的内容</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<h4 id="四、分割线"><a href="#四、分割线" class="headerlink" title="四、分割线"></a>四、分割线</h4><p>三个或者三个以上的 - 或者 * 都可以。<br>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">----</span><br><span class="line">***</span><br><span class="line">*****</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<hr>
+<hr>
+<hr>
+<hr>
+<h4 id="五、图片"><a href="#五、图片" class="headerlink" title="五、图片"></a>五、图片</h4><p>语法：<br>![图片alt](图片地址 ‘’图片title’’)</p>
+<p>图片alt就是显示在图片下面的文字，相当于对图片内容的解释。<br>图片title是图片的标题，当鼠标移到图片上时显示的内容。title可加可不加</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![blockchain](https://www.baidu.com/link?url=Oshs7TTIS7ATkTi_mTNlFyP2mBI3Jpg9oRrO2kY9c7HsH1fxPGuV36DcNatRqI00WOvZVk9jqhCJugunwZd0szzwyJSL48TZqxexmJx_FxXn5vHaZ4R1XIFzXym_uWsh54i7241XpLSXkWYV71RZR-RRLeSiq-fOcSd-NPaY2jYqyIDN-tH_lvb_zX83bEJ2ciaV5f_HAF8xoEB3O6eWWvvB_iNnlYEEW4EBaaX73tOvcm-c4Iu_6A4LCncOSdADHdDOAYZbyP6dPTZaGbKjGdmZkxeTzN3Ln8EagEz7elDJCPlAlT3Xx3fr9v2TOVh9T_XonNm8XJ_jTtimSGNvh72wKSimrhns9kM-bio8Y6G_sPOcE91lAJfUyqmWOFQ4HNDo0U5uF-LXzL6qazjHZdAL4422LCf3OoQW8FywGDHmrL7pIoXKn3wGcIEjgf3IV-ZrfIDmq2UsfB7oxpENGMtQiGtjTqdJ5PFNxCxFMe-HykBsCjkl33t2raHgYco_QOId237Qzw7KTpmpDu5cm-uIYTrm9j0jjnjiwcJJyT-kk0xcySjOwk4FT2xBxo0I8h3rwhYUJkxXtDi1YHUyI5rvFo9UBxVnqLBV8mx0CcjRnxeDWWxpOKrfJSGz9aPERRR0ApPP1A3PlL8zKMLmE_&amp;timg=&amp;click_t=1559285904085&amp;s_info=1425_789&amp;wd=&amp;eqid=adaa6738000d4b05000000045cf0d08c &quot;小猫咪&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img src="https://www.baidu.com/link?url=Oshs7TTIS7ATkTi_mTNlFyP2mBI3Jpg9oRrO2kY9c7HsH1fxPGuV36DcNatRqI00WOvZVk9jqhCJugunwZd0szzwyJSL48TZqxexmJx_FxXn5vHaZ4R1XIFzXym_uWsh54i7241XpLSXkWYV71RZR-RRLeSiq-fOcSd-NPaY2jYqyIDN-tH_lvb_zX83bEJ2ciaV5f_HAF8xoEB3O6eWWvvB_iNnlYEEW4EBaaX73tOvcm-c4Iu_6A4LCncOSdADHdDOAYZbyP6dPTZaGbKjGdmZkxeTzN3Ln8EagEz7elDJCPlAlT3Xx3fr9v2TOVh9T_XonNm8XJ_jTtimSGNvh72wKSimrhns9kM-bio8Y6G_sPOcE91lAJfUyqmWOFQ4HNDo0U5uF-LXzL6qazjHZdAL4422LCf3OoQW8FywGDHmrL7pIoXKn3wGcIEjgf3IV-ZrfIDmq2UsfB7oxpENGMtQiGtjTqdJ5PFNxCxFMe-HykBsCjkl33t2raHgYco_QOId237Qzw7KTpmpDu5cm-uIYTrm9j0jjnjiwcJJyT-kk0xcySjOwk4FT2xBxo0I8h3rwhYUJkxXtDi1YHUyI5rvFo9UBxVnqLBV8mx0CcjRnxeDWWxpOKrfJSGz9aPERRR0ApPP1A3PlL8zKMLmE_&timg=&click_t=1559285904085&s_info=1425_789&wd=&eqid=adaa6738000d4b05000000045cf0d08c" alt="blockchain" title="小猫咪"></p>
+<p>上传本地图片直接点击导航栏的图片标志，选择图片即可</p>
+<h4 id="六、超链接"><a href="#六、超链接" class="headerlink" title="六、超链接"></a>六、超链接</h4><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[超链接名](超链接地址 &quot;超链接title&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>title可加可不加</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[简书](http://jianshu.com)</span><br><span class="line">[百度](http://baidu.com)</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：<br><a href="http://jianshu.com" target="_blank" rel="noopener">简书</a><br><a href="http://baidu.com" target="_blank" rel="noopener">百度</a><br>注：Markdown本身语法不支持链接在新页面中打开。</p>
+<h4 id="七、列表"><a href="#七、列表" class="headerlink" title="七、列表"></a>七、列表</h4><ul>
+<li>无序列表</li>
+</ul>
+<p>语法：<br>无序列表用 - + * 任何一种都可以</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 列表内容</span><br><span class="line">+ 列表内容</span><br><span class="line">* 列表内容</span><br></pre></td></tr></table></figure>
+
+<p>注意：- + * 跟内容之间都要有一个空格</p>
+<p>效果如下：</p>
+<ul>
+<li>列表内容</li>
+</ul>
+<ul>
+<li>列表内容</li>
+</ul>
+<ul>
+<li><p>列表内容</p>
+</li>
+<li><p>有序列表</p>
+</li>
+</ul>
+<p>语法：<br>数字加点<br>1.列表内容<br>2.列表内容<br>3.列表内容</p>
+<p>注意：序号跟内容之间要有空格</p>
+<p>效果如下：<br>1.列表内容<br>2.列表内容<br>3.列表内容</p>
+<ul>
+<li>列表嵌套</li>
+</ul>
+<p>上一级和下一级之间敲三个空格即可</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">* 一级无序列表内容</span><br><span class="line">   * 二级无序列表内容</span><br><span class="line">   * 二级无序列表内容</span><br><span class="line">   * 二级无序列表内容</span><br><span class="line"></span><br><span class="line">* 一级无序列表内容</span><br><span class="line">   1.二级有序列表内容</span><br><span class="line">   2.二级有序列表内容</span><br><span class="line">   3.二级有序列表内容</span><br><span class="line"></span><br><span class="line">1.一级有序列表内容</span><br><span class="line">   * 二级无序列表内容</span><br><span class="line">   * 二级无序列表内容</span><br><span class="line">   * 二级无序列表内容</span><br><span class="line"></span><br><span class="line">2.一级有序列表内容</span><br><span class="line">   1.二级有序列表内容</span><br><span class="line">   2.二级有序列表内容</span><br><span class="line">   3.二级有序列表内容</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<ul>
+<li><p>一级无序列表内容</p>
+<ul>
+<li>二级无序列表内容</li>
+<li>二级无序列表内容</li>
+<li>二级无序列表内容</li>
+</ul>
+</li>
+<li><p>一级无序列表内容<br> 1.二级有序列表内容<br> 2.二级有序列表内容<br> 3.二级有序列表内容</p>
+</li>
+</ul>
+<p>1.一级有序列表内容</p>
+<ul>
+<li>二级无序列表内容</li>
+<li>二级无序列表内容</li>
+<li>二级无序列表内容</li>
+</ul>
+<p>2.一级有序列表内容<br>   1.二级有序列表内容<br>   2.二级有序列表内容<br>   3.二级有序列表内容</p>
+<h4 id="八、表格"><a href="#八、表格" class="headerlink" title="八、表格"></a>八、表格</h4><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">表头|表头|表头</span><br><span class="line">---|:--:|---:</span><br><span class="line">内容|内容|内容</span><br><span class="line">内容|内容|内容</span><br><span class="line"></span><br><span class="line">第二行分割表头和内容。</span><br><span class="line">- 有一个就行，为了对齐，多加了几个</span><br><span class="line">文字默认居左</span><br><span class="line">-两边加：表示文字居中</span><br><span class="line">-右边加：表示文字居右</span><br><span class="line">注：原生的语法两边都要用 | 包起来。此处省略</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">姓名|技能|排行</span><br><span class="line">--|:--:|--:</span><br><span class="line">刘备|哭|大哥</span><br><span class="line">关羽|打|二哥</span><br><span class="line">张飞|骂|三弟</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<table>
+<thead>
+<tr>
+<th>姓名</th>
+<th align="center">技能</th>
+<th align="right">排行</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>刘备</td>
+<td align="center">哭</td>
+<td align="right">大哥</td>
+</tr>
+<tr>
+<td>关羽</td>
+<td align="center">打</td>
+<td align="right">二哥</td>
+</tr>
+</tbody></table>
+<h4 id="九、代码"><a href="#九、代码" class="headerlink" title="九、代码"></a>九、代码</h4><p>语法：<br>单行代码：代码之间分别用一个反引号包起来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`代码内容`</span><br></pre></td></tr></table></figure>
+
+<p>代码块：代码之间分别用三个反引号包起来，且两边的反引号单独占一行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(```)</span><br><span class="line">  代码...</span><br><span class="line">  代码...</span><br><span class="line">  代码...</span><br><span class="line">(```)</span><br></pre></td></tr></table></figure>
+
+<p>注：为了防止转译，前后三个反引号处加了小括号，实际是没有的。这里只是用来演示，实际中去掉两边小括号即可。</p>
+<p>示例：<br>单行代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`create database hero;`</span><br></pre></td></tr></table></figure>
+
+<p>代码块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(```)</span><br><span class="line">    function fun()&#123;</span><br><span class="line">         echo &quot;这是一句非常牛逼的代码&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    fun();</span><br><span class="line">(```)</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：<br>单行代码<br><code>create database hero;</code><br>代码块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function fun()&#123;</span><br><span class="line">     echo &quot;这是一句非常牛逼的代码&quot;;</span><br><span class="line">&#125;</span><br><span class="line">fun();</span><br></pre></td></tr></table></figure>
+
+<h4 id="十、流程图"><a href="#十、流程图" class="headerlink" title="十、流程图"></a>十、流程图</h4><div id="flowchart-0" class="flow-chart"></div>
+
+<ul>
+<li><p>一个纯文本的语法怎么画图？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">将流程图代码包含在```folw和```之间即可</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>流程图代码分两块，上面一块是创建你的流程（创建元素），然后隔一行，创建流程的走向(连接元素)</p>
+</li>
+<li><p>创建流程（元素）：tag=&gt;type: content:&gt;url</p>
+<ul>
+<li>tag 是流程图中的标签，在第二段连接元素时会用到。名称可以任意，一般为流程的英文缩写和数字的组合。</li>
+<li>type 用来确定标签的类型，=&gt;后面表示类型。由于标签的名称可以任意指定，所以要依赖type来确定标签的类型</li>
+<li>标签有6种类型：start end operation subroutine condition inputoutput</li>
+<li>content 是流程图文本框中的描述内容，: 后面表示内容，中英文均可。特别注意，冒号与文本之间一定要有个空格</li>
+<li>url是一个连接，与框框中的文本相绑定，:&gt;后面就是对应的 url 链接，点击文本时可以通过链接跳转到 url 指定页面</li>
+</ul>
+</li>
+<li><p>指向流程(连接元素)：标识（类别）-&gt;下一个标识</p>
+<ul>
+<li>使用 -&gt; 来连接两个元素</li>
+<li>对于condition类型，有yes和no两个分支，如示例中的cond(yes)和cond(no)</li>
+<li>每个元素可以制定分支走向，默认向下，也可以用right指向右边，如示例中cond2(yes,right)。</li>
+</ul>
+</li>
+</ul>
+<p>流程图元素</p>
+<ul>
+<li>开始<br>st=&gt;start: 开始</li>
+<li>操作<br>op1=&gt;operation: 操作、执行说明</li>
+<li>条件<br>cond=&gt;condition: 确认？</li>
+<li>子程序<br>sub1=&gt;subroutine: 子程序操作说明</li>
+<li>用户输入或输出<br>io1=&gt;inputoutput: 输入密码</li>
+<li>结束<br>e=&gt;end: 结束</li>
+</ul>
+<h4 id="十一-整一个To-Do-List"><a href="#十一-整一个To-Do-List" class="headerlink" title="十一 整一个To Do List"></a>十一 整一个To Do List</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- [x] 学习python基础 【减号+[+空格或x+]+空格】</span><br><span class="line">- [ ] 学习python网络编程</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><input checked disabled type="checkbox"> 学习python基础 【减号+[+空格或x+]+空格】</li>
+<li><input disabled type="checkbox"> 学习python网络编程</li>
+</ul>
+<blockquote>
+<p>作者：高鸿祥<br>链接：<a href="https://www.jianshu.com/p/191d1e21f7ed" target="_blank" rel="noopener">https://www.jianshu.com/p/191d1e21f7ed</a><br>来源：简书<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: 开始 
+e=>end: 登录 
+io1=>inputoutput: 输入用户名密码 
+sub1=>subroutine: 数据库查询子类 
+cond=>condition: 是否有此用户 
+cond2=>condition: 密码是否正确 
+op=>operation: 读入用户信息
+st->io1->sub1->cond 
+cond(yes,right)->cond2 
+cond(no)->io1(right) 
+cond2(yes,right)->op->e 
+cond2(no)->io1</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script></p>
+</blockquote>
+
+        </div>
+        
+          
+
+
+  <section class="meta" id="footer-meta">
+    <hr>
+    <div class="new-meta-box">
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-05-31T15:46:22+08:00">
+  <a class="notlink">
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>last updated at May 31, 2019</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Markdown/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>Markdown</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/文档编写/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>文档编写</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/05/29/Markdown-text/&title=Markdown使用手册（持续更新） | Anges Zhu&summary=Markdown简介
+Markdown是一种纯文本格式的标记语言。通过简单的标记语法，它可以使普通文本内容具有一定的格式。
+">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2019/05/29/Markdown-text/&title=Markdown使用手册（持续更新） | Anges Zhu&summary=Markdown简介
+Markdown是一种纯文本格式的标记语言。通过简单的标记语法，它可以使普通文本内容具有一定的格式。
+">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/05/29/Markdown-text/&title=Markdown使用手册（持续更新） | Anges Zhu&summary=Markdown简介
+Markdown是一种纯文本格式的标记语言。通过简单的标记语法，它可以使普通文本内容具有一定的格式。
+">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Markdown使用手册（持续更新）',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class="l_side">
+  
+    
+    
+      
+        
+          
+          
+            <section class="widget author">
+  <div class="content pure">
+    
+      <div class="avatar">
+        <img class="avatar" src="/img/my.jpg">
+      </div>
+    
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/" class="social fas fa-rss flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:ju_limeng@126.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/AngesZhu/" class="social fab fa-github flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://www.cnblogs.com/AngesZhu/" class="social fab fa-code-branch flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://study.163.com/provider/400000000674013/course.htm?share=2&shareId=400000000674013" class="social fas fa-book flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            <section class="widget grid">
+  
+<header class="pure">
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
+  
+</header>
+
+  <div class="content pure">
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/" id="home">
+          
+            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+          
+          近期文章
+        </a></li>
+      
+        <li><a class="flat-box" title="/archives/" href="/archives/" rel="nofollow" id="archives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          文章归档
+        </a></li>
+      
+        <li><a class="flat-box" title="/projects/" href="/projects/" id="projects">
+          
+            <i class="fas fa-code-branch fa-fw" aria-hidden="true"></i>
+          
+          开源项目
+        </a></li>
+      
+        <li><a class="flat-box" title="/friends/" href="/friends/" rel="nofollow" id="friends">
+          
+            <i class="fas fa-link fa-fw" aria-hidden="true"></i>
+          
+          我的友链
+        </a></li>
+      
+        <li><a class="flat-box" title="https://xaoxuu.com/wiki/material-x/" href="https://xaoxuu.com/wiki/material-x/" rel="nofollow" id="https:xaoxuu.comwikimaterial-x">
+          
+            <i class="fas fa-book fa-fw" aria-hidden="true"></i>
+          
+          主题文档
+        </a></li>
+      
+        <li><a class="flat-box" title="/about/" href="/about/" rel="nofollow" id="about">
+          
+            <i class="fas fa-info-circle fa-fw" aria-hidden="true"></i>
+          
+          关于小站
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class="widget toc-wrapper">
+    
+<header class="pure">
+  <div><i class="fas fa-list fa-fw fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;目录结构</div>
+  
+    <div class="wrapper"><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class="content pure">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Markdown简介"><span class="toc-text">Markdown简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#它的优缺点"><span class="toc-text">它的优缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Markdown语法"><span class="toc-text">Markdown语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、标题"><span class="toc-text">一、标题</span></a></li></ol></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#这是一级标题"><span class="toc-text">这是一级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#这是二级标题"><span class="toc-text">这是二级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#这是三级标题"><span class="toc-text">这是三级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#这是四级标题"><span class="toc-text">这是四级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#这是五级标题"><span class="toc-text">这是五级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#这是六级标题"><span class="toc-text">这是六级标题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、字体"><span class="toc-text">二、字体</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、引用"><span class="toc-text">三、引用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四、分割线"><span class="toc-text">四、分割线</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#五、图片"><span class="toc-text">五、图片</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#六、超链接"><span class="toc-text">六、超链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#七、列表"><span class="toc-text">七、列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#八、表格"><span class="toc-text">八、表格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#九、代码"><span class="toc-text">九、代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#十、流程图"><span class="toc-text">十、流程图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#十一-整一个To-Do-List"><span class="toc-text">十一 整一个To Do List</span></a></li></ol></li></ol></li></ol>
+    </li></div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class="widget category">
+    
+<header class="pure">
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  
+    <a class="rightBtn" rel="nofollow" href="/categories/" title="categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class="content pure">
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/日常需要/" href="/categories/日常需要/"><div class="name">日常需要</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/日常需要/文档编写/" href="/categories/日常需要/文档编写/"><div class="name">文档编写</div><div class="badge">(1)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class="widget tagcloud">
+    
+<header class="pure">
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+    <a class="rightBtn" rel="nofollow" href="/tags/" title="tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class="content pure">
+      <a href="/tags/Markdown/" style="font-size: 14px; color: #999">Markdown</a> <a href="/tags/文档编写/" style="font-size: 14px; color: #999">文档编写</a>
+    </div>
+  </section>
+
+
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="/" class="social fas fa-rss flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="mailto:ju_limeng@126.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://github.com/AngesZhu/" class="social fab fa-github flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://www.cnblogs.com/AngesZhu/" class="social fab fa-code-branch flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://study.163.com/provider/400000000674013/course.htm?share=2&amp;shareId=400000000674013" class="social fas fa-book flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+    </div>
+  
+  <br>
+  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+</div>
+  <div>
+    Use
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Anges's Garden</a>
+    as theme
+    
+      , 
+      total visits
+      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+      times
+    
+    . 
+  </div>
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('.cover') {
+          $('.cover').backstretch(
+          ["https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        } else {
+          $.backstretch(
+          ["https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/app.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "Copied";
+  let COPY_FAILURE = "Copy failed";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>

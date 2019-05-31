@@ -19,7 +19,7 @@ var customSearch;
 		// button
 		const $postsBtn = $('.menu .active');
 		const $topBtn = $('.s-top');
-		const $titleBtn = $('h1.title', '#header-meta');
+		const $titleBtn = $('title', '#header-meta');
 		// anchor
 		const $bodyAnchor = $('.l_body');
 		// action
