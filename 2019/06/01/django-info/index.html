@@ -4,8 +4,10 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Category: 日常需要 | Anges Zhu</title>
+  <title>Django介绍 | Anges Zhu</title>
   
+  
+  <meta name="description" content="介绍一下什么是DJango以及MVC">
   
 
   
@@ -44,7 +46,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class="cover  half">
+    <cover class="cover post half">
       
         
   <h1 class="title">Anges's Garden</h1>
@@ -222,27 +224,12 @@
 
   <div class="l_body">
     <div class='body-wrapper'>
-      
-<div class="l_main">
+      <div class="l_main">
   
-    
-      
-  <section class="post-list">
-    
-      
-        
-          
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
+
   
+    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class="meta">
@@ -251,11 +238,13 @@
     <div class="meta" id="header-meta">
       
         
-  <h2 class="title">
-    <a href="/2019/05/31/Knowledge-system/">
-      技术栈（简单整理）
-    </a>
-  </h2>
+  
+    <h1 class="title">
+      <a href="/2019/06/01/django-info/">
+        Django介绍
+      </a>
+    </h1>
+  
 
 
       
@@ -281,7 +270,7 @@
             <div class="new-meta-item date">
   <a class="notlink">
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-05-31</p>
+    <p>2019-06-01</p>
   </a>
 </div>
 
@@ -291,9 +280,9 @@
             
   
   <div class="new-meta-item category">
-    <a href="/categories/日常需要/寻找目标/" rel="nofollow">
+    <a href="/categories/技术栈/Django/" rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>日常需要&nbsp;/&nbsp;寻找目标</p>
+      <p>技术栈&nbsp;/&nbsp;Django</p>
     </a>
   </div>
 
@@ -302,6 +291,19 @@
         
           
             
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class="notlink">
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
 
           
         
@@ -318,152 +320,236 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      自己的一些见解
-      
-        <div class="readmore">
-          <a href="/2019/05/31/Knowledge-system/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/知识体系-学习方向-职业规划/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>知识体系 学习方向 职业规划</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/05/29/Markdown-text/">
-      Markdown使用手册（持续更新）
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    <a href="https://angeszhu.github.io" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>Anges Zhu</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-05-29</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class="new-meta-item category">
-    <a href="/categories/日常需要/文档编写/" rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>日常需要&nbsp;/&nbsp;文档编写</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <h2 id="Markdown简介"><a href="#Markdown简介" class="headerlink" title="Markdown简介"></a>Markdown简介</h2><blockquote>
-<p>Markdown是一种纯文本格式的标记语言。通过简单的标记语法，它可以使普通文本内容具有一定的格式。</p>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          <h2 id="什么是Django"><a href="#什么是Django" class="headerlink" title="什么是Django"></a>什么是Django</h2><h3 id="django-Python-Web-框架"><a href="#django-Python-Web-框架" class="headerlink" title="django(Python Web 框架)"></a>django(Python Web 框架)</h3><blockquote>
+<p>Django是一个开放源代码的Web应用框架，由Python写成。采用了MVC的框架模式，即模型M，视图V和控 制器C。它最初是被开发来用于管理劳伦斯出版集团旗下的一些以新闻内容为主的网站的，即是CMS(内容 管理系统)软件。并于2005年7月在BSD许可证下发布。这套框架是以比利时的吉普赛爵士吉他手Django Reinhardt来命名的。</p>
 </blockquote>
-      
-        <div class="readmore">
-          <a href="/2019/05/29/Markdown-text/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            Read More
-          </a>
+<h3 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h3><p>Django是一个基于MVC构造的框架。</p>
+<p>但是在Django中，控制器接受用户输入的部分由框架自行处理，</p>
+<p>所以 Django 里更关注的是模型(Model)、模板(Template)和视图(Views)，称为 MTV模式。</p>
+<p>它们各自的职责 如下:</p>
+<table>
+<thead>
+<tr>
+<th>层次</th>
+<th align="center">职责</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>模型(Model)，即数 据存取层</td>
+<td align="center">处理与数据相关的所有事务: 如何存取、如何验证有效性、包含哪些行为 以及数据之间的关系等。</td>
+</tr>
+<tr>
+<td>模板(Template)，即表 现层</td>
+<td align="center">处理与表现相关的决定: 如何在页面或其他类型文档中进行显示。</td>
+</tr>
+<tr>
+<td>视图(View)，即业务 逻辑层</td>
+<td align="center">存取模型及调取恰当模板的相关逻辑。模型与模板的桥梁。</td>
+</tr>
+</tbody></table>
+<hr>
+<p>从以上表述可以看出Django视图不处理用户输入，而仅仅决定要展现哪些数据给用户，</p>
+<p>而Django模板仅仅决定如何展现Django视图指定的数据。</p>
+<p>或者说, Django将MVC中的视图进一步分解为 Django视图 和 Django模板两个部分，</p>
+<p>分别决定 “展现哪些数据” 和 “如何展现”，使得Django的模板可以根据需要随时替 换，而不仅仅限制于内置的模板。</p>
+<hr>
+<p>至于MVC控制器部分，由Django框架的URLconf来实现。URLconf机制是使用正则表达式匹配URL，</p>
+<p>然后调 用合适的Python函数。URLconf对于URL的规则没有任何限制，你完全可以设计成任意的URL风格，</p>
+<p>不管是 传统的，RESTful的，或者是另类的。</p>
+<p>框架把控制层给封装了，无非与数据交互这层都是数据库表的读,写,删 除,更新的操作。</p>
+<p>在写程序的时候，只要调用相应的方法就行了，感觉很方便。</p>
+<p>程序员把控制层东西交给 Django自动完成了。 </p>
+<p>只需要编写非常少的代码完成很多的事情。</p>
+<p>所以，它比MVC框架考虑的问题要深一 步，因为我们程序员大都在写控制层的程序。</p>
+<p>现在这个工作交给了框架，仅需写很少的调用代码，大大提高 了工作效率。</p>
+<hr>
+<p>Django的主要目的是简便、快速的开发数据库驱动的网站。</p>
+<p>它强调代码复用，多个组件可以很方便的以“插 件”形式服务于整个框架，</p>
+<p>Django有许多功能强大的第三方插件，你甚至可以很方便的开发出自己的工具包。</p>
+<p>这使得Django具有很强的可扩展性。</p>
+<p>它还强调快速开发和DRY(Do Not Repeat Yourself)原则。</p>
+<hr>
+<p>Django基于MVC的设计十分优美:</p>
+<ul>
+<li>对象关系映射 (ORM,object-relational mapping):<ul>
+<li>以Python类形式定义你的数据模型，ORM将模型与 关系数据库连接起来，你将得到一个非常容易使用的数据库API，同时你也可以在Django中使用原始的 SQL语句。</li>
+</ul>
+</li>
+<li>URL 分派:<ul>
+<li>使用正则表达式匹配URL，你可以设计任意的URL，没有框架的特定限定。像你喜欢的一样 灵活。 </li>
+</ul>
+</li>
+<li>模版系统:<ul>
+<li>使用Django强大而可扩展的模板语言，可以分隔设计、内容和Python代码。并且具有可继 承性。 </li>
+</ul>
+</li>
+<li>表单处理:<ul>
+<li>你可以方便的生成各种表单模型，实现表单的有效性检验。可以方便的从你定义的模型实例 生成相应的表单。</li>
+</ul>
+</li>
+<li>Cache系统:<ul>
+<li>可以挂在内存缓冲或其它的框架实现超级缓冲 – 实现你所需要的粒度。 </li>
+</ul>
+</li>
+<li>会话(session)，用户登录与权限检查，快速开发用户会话功能。 </li>
+<li>国际化:<ul>
+<li>内置国际化系统，方便开发出多种语言的网站。 </li>
+</ul>
+</li>
+<li>自动化的管理界面:<ul>
+<li>不需要你花大量的工作来创建人员管理和更新内容。Django自带一个ADMIN site, 类似于内容管理系统</li>
+</ul>
+</li>
+</ul>
+<h3 id="工作机制"><a href="#工作机制" class="headerlink" title="工作机制"></a>工作机制</h3><p><img src="//angeszhu.github.io/2019/06/01/django-info/1.png" alt></p>
+<p>1.用manage .py runserver 启动Django服务器时就载入了在同一目录下的settings .py。该文件包含了项目 中的配置信息，如前面讲的URLConf等，其中最重要的配置就是ROOT_URLCONF，它告诉Django哪个 Python模块应该用作本站的URLConf，默认的是urls .py<br>2.当访问url的时候，Django会根据ROOT_URLCONF的设置来装载URLConf。 3.然后按顺序逐个匹配URLConf里的URLpatterns。如果找到则会调用相关联的视图函数，并把<br>HttpRequest对象作为第一个参数(通常是request) 4.最后该view函数负责返回一个HttpResponse对象</p>
+<h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><p>(点击可进入)</p>
+<p><a href="http://djangobook.py3k.cn/2.0/" target="_blank" rel="noopener">The Django Book</a></p>
+<p><a href="https://www.djangoproject.com/" target="_blank" rel="noopener">Django官方网站</a></p>
+<p><a href="https://docs.djangoproject.com/zh-hans/2.2/intro/tutorial01/" target="_blank" rel="noopener">Django官方文档</a></p>
+
         </div>
+        
+          
+
+
+  <section class="meta" id="footer-meta">
+    <hr>
+    <div class="new-meta-box">
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-06-01T10:37:22+08:00">
+  <a class="notlink">
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>last updated at Jun 1, 2019</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Django/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>Django</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Python/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>Python</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Web框架/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>Web框架</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/测试开发/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>测试开发</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=https://angeszhu.github.io/2019/06/01/django-info/&title=Django介绍 | Anges Zhu&summary=">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://angeszhu.github.io/2019/06/01/django-info/&title=Django介绍 | Anges Zhu&summary=">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=https://angeszhu.github.io/2019/06/01/django-info/&title=Django介绍 | Anges Zhu&summary=">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
       
     </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/Markdown/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>Markdown</a>
-        
-          <a href="/tags/文档编写/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>文档编写</a>
-        
-      </div>
-    
   </section>
-</article>
 
-          </div>
+
         
-      
-    
-  </section>
+        
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
+                            <h4>
+                                <a href="/2019/06/01/install-django/" rel="prev" title="Django安装以及创建项目">
+                                  
+                                      Django安装以及创建项目
+                                  
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/Django/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>Django</a> <a class="tag" href="/tags/Python/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>Python</a> <a class="tag" href="/tags/Web框架/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>Web框架</a> <a class="tag" href="/tags/测试开发/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>测试开发</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2019/05/31/install-python/" rel="prev" title="Python环境的安装">
+                                    
+                                        Python环境的安装
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/Python/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>Python</a> <a class="tag" href="/tags/环境/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>环境</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+      </section>
+    </article>
   
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
 
   
 
 
-    
   
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Django介绍',
+      tools: true
+    }
+  </script>
+
 
 </div>
 <aside class="l_side">
@@ -644,6 +730,20 @@
           
           
             
+  <section class="widget toc-wrapper">
+    
+<header class="pure">
+  <div><i class="fas fa-list fa-fw fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;目录结构</div>
+  
+    <div class="wrapper"><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class="content pure">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Django"><span class="toc-text">什么是Django</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#django-Python-Web-框架"><span class="toc-text">django(Python Web 框架)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#架构设计"><span class="toc-text">架构设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工作机制"><span class="toc-text">工作机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#附录"><span class="toc-text">附录</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
 
           
         

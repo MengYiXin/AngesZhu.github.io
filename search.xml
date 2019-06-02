@@ -4,6 +4,72 @@
   
     
     <entry>
+      <title>Django安装以及创建项目</title>
+      <link href="/2019/06/01/install-django/"/>
+      <url>/2019/06/01/install-django/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Django安装以及创建项目"><a href="#Django安装以及创建项目" class="headerlink" title="Django安装以及创建项目"></a>Django安装以及创建项目</h2><h3 id="Django安装"><a href="#Django安装" class="headerlink" title="Django安装"></a>Django安装</h3><h4 id="Python版本以及Django版本选择"><a href="#Python版本以及Django版本选择" class="headerlink" title="Python版本以及Django版本选择"></a>Python版本以及Django版本选择</h4><p>Django2.0以上版本，支持Python3.4以上的版本，而取消对Python2的支持。</p><p>而Django 1.11是支持Python2.7的最后版本。</p><h4 id="压缩包下载安装"><a href="#压缩包下载安装" class="headerlink" title="压缩包下载安装"></a>压缩包下载安装</h4><p><a href="https://www.djangoproject.com/download/" target="_blank" rel="noopener">下载Django</a></p><p><a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#sendkeys" target="_blank" rel="noopener">下载Python的第三方库包地址</a></p><p>下载 Django 压缩包，</p><p>解压并和Python安装目录放在同一个根目录，</p><p>进入 Django 目录，执行python setup.py install，</p><p>然后开始安装，Django将要被安装到Python的Lib下site-packages。</p><p><img src="//angeszhu.github.io/2019/06/01/install-django/1.png" alt></p><p>然后是配置环境变量，将这几个目录添加到系统环境变量中: </p><p>C:\Python33\Lib\site-packages\django;C:\Python33\Scripts。 </p><p>添加完成后就可以使用Django的django-admin.py命令新建工程了。</p><p><img src="//angeszhu.github.io/2019/06/01/install-django/2.png" alt></p><h4 id="Pip命令安装"><a href="#Pip命令安装" class="headerlink" title="Pip命令安装"></a>Pip命令安装</h4><p>在终端输入以下命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install Django</span><br></pre></td></tr></table></figure><p>如果想要制定Django版本，那么可以输入，当然版本号可以根据需要来输入:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install Django==2.0.5</span><br></pre></td></tr></table></figure><h4 id="检查Django是否安装成功"><a href="#检查Django是否安装成功" class="headerlink" title="检查Django是否安装成功"></a>检查Django是否安装成功</h4><p>输入以下命令进行检查：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import django</span><br><span class="line">django.__version__</span><br></pre></td></tr></table></figure><p>如果出现如下图一样的内容，那么证明你安装成功了。</p><p><img src="//angeszhu.github.io/2019/06/01/install-django/3.png" alt></p><h3 id="Django项目的创建"><a href="#Django项目的创建" class="headerlink" title="Django项目的创建"></a>Django项目的创建</h3><h4 id="1-命令行创建django项目"><a href="#1-命令行创建django项目" class="headerlink" title="1.命令行创建django项目"></a>1.命令行创建django项目</h4><p>在终端输入命令:django-admin startproject 项目名称</p><p>注意:你在哪个目录输入命令创建，你的项目就会创建到哪里 </p><h4 id="2-使用编译器创建Django项目"><a href="#2-使用编译器创建Django项目" class="headerlink" title="2.使用编译器创建Django项目"></a>2.使用编译器创建Django项目</h4><p>选择:File -&gt; New Project </p><p>选择django，填写django项目名称，</p><p>选择环境运行的sdk以及django配置，是否创建app，app名称等内容</p><p><img src="//angeszhu.github.io/2019/06/01/install-django/4.png" alt></p><h4 id="3-Django的目录结构"><a href="#3-Django的目录结构" class="headerlink" title="3.Django的目录结构"></a>3.Django的目录结构</h4><p><img src="//angeszhu.github.io/2019/06/01/install-django/5.png" alt></p><p>一个Django项目，可以包含多个项目应用，</p><p>这些应用在Django中，又可以称为app。 </p><p>每一个app代表网站的一个，或多个网页。</p><p>创建 app时，可以进入项目目录，</p><p>然后用命令： python manage.py startapp app名称 创建 </p><p>也可以在pycharm创建项目时，就一起创建好，pycharm给我们提供了这样的功能。</p><h4 id="4-Django项目的启动"><a href="#4-Django项目的启动" class="headerlink" title="4.Django项目的启动"></a>4.Django项目的启动</h4><p>1.命令行启动</p><p>python manage.py runserver 2.pycharm启动</p><p><img src="//angeszhu.github.io/2019/06/01/install-django/6.png" alt></p><p>在图中我们可以看到，右上角的运行附近，有一个选择框。 </p><p>这里可以选择我们的django项目，点击右侧三角，即可运行django调试服务器。 </p><p>而另外一个选项，Edit，可以配置我们django项目启动的一些信息，例如:ip、端口号等</p><p><img src="//angeszhu.github.io/2019/06/01/install-django/7.png" alt></p><p>如果没有Dj启动，也可以利用Edit添加一个Django启动。</p><p>但是添加的时候要跟Django配置的一样。</p><p><img src="//angeszhu.github.io/2019/06/01/install-django/8.png" alt></p><p><img src="//angeszhu.github.io/2019/06/01/install-django/9.png" alt></p><p>这里最重要的，就是在设置中，把setting加载进去。 </p><p>启动后在浏览器输入地址:127.0.0.1:8000 可以打开成功页面，即项目创建成功</p><p><img src="//angeszhu.github.io/2019/06/01/install-django/10.png" alt></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术栈 </category>
+          
+          <category> Django </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Django </tag>
+            
+            <tag> Python </tag>
+            
+            <tag> Web框架 </tag>
+            
+            <tag> 测试开发 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Django介绍</title>
+      <link href="/2019/06/01/django-info/"/>
+      <url>/2019/06/01/django-info/</url>
+      
+        <content type="html"><![CDATA[<h2 id="什么是Django"><a href="#什么是Django" class="headerlink" title="什么是Django"></a>什么是Django</h2><h3 id="django-Python-Web-框架"><a href="#django-Python-Web-框架" class="headerlink" title="django(Python Web 框架)"></a>django(Python Web 框架)</h3><blockquote><p>Django是一个开放源代码的Web应用框架，由Python写成。采用了MVC的框架模式，即模型M，视图V和控 制器C。它最初是被开发来用于管理劳伦斯出版集团旗下的一些以新闻内容为主的网站的，即是CMS(内容 管理系统)软件。并于2005年7月在BSD许可证下发布。这套框架是以比利时的吉普赛爵士吉他手Django Reinhardt来命名的。</p></blockquote><h3 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h3><p>Django是一个基于MVC构造的框架。</p><p>但是在Django中，控制器接受用户输入的部分由框架自行处理，</p><p>所以 Django 里更关注的是模型(Model)、模板(Template)和视图(Views)，称为 MTV模式。</p><p>它们各自的职责 如下:</p><table><thead><tr><th>层次</th><th align="center">职责</th></tr></thead><tbody><tr><td>模型(Model)，即数 据存取层</td><td align="center">处理与数据相关的所有事务: 如何存取、如何验证有效性、包含哪些行为 以及数据之间的关系等。</td></tr><tr><td>模板(Template)，即表 现层</td><td align="center">处理与表现相关的决定: 如何在页面或其他类型文档中进行显示。</td></tr><tr><td>视图(View)，即业务 逻辑层</td><td align="center">存取模型及调取恰当模板的相关逻辑。模型与模板的桥梁。</td></tr></tbody></table><hr><p>从以上表述可以看出Django视图不处理用户输入，而仅仅决定要展现哪些数据给用户，</p><p>而Django模板仅仅决定如何展现Django视图指定的数据。</p><p>或者说, Django将MVC中的视图进一步分解为 Django视图 和 Django模板两个部分，</p><p>分别决定 “展现哪些数据” 和 “如何展现”，使得Django的模板可以根据需要随时替 换，而不仅仅限制于内置的模板。</p><hr><p>至于MVC控制器部分，由Django框架的URLconf来实现。URLconf机制是使用正则表达式匹配URL，</p><p>然后调 用合适的Python函数。URLconf对于URL的规则没有任何限制，你完全可以设计成任意的URL风格，</p><p>不管是 传统的，RESTful的，或者是另类的。</p><p>框架把控制层给封装了，无非与数据交互这层都是数据库表的读,写,删 除,更新的操作。</p><p>在写程序的时候，只要调用相应的方法就行了，感觉很方便。</p><p>程序员把控制层东西交给 Django自动完成了。 </p><p>只需要编写非常少的代码完成很多的事情。</p><p>所以，它比MVC框架考虑的问题要深一 步，因为我们程序员大都在写控制层的程序。</p><p>现在这个工作交给了框架，仅需写很少的调用代码，大大提高 了工作效率。</p><hr><p>Django的主要目的是简便、快速的开发数据库驱动的网站。</p><p>它强调代码复用，多个组件可以很方便的以“插 件”形式服务于整个框架，</p><p>Django有许多功能强大的第三方插件，你甚至可以很方便的开发出自己的工具包。</p><p>这使得Django具有很强的可扩展性。</p><p>它还强调快速开发和DRY(Do Not Repeat Yourself)原则。</p><hr><p>Django基于MVC的设计十分优美:</p><ul><li>对象关系映射 (ORM,object-relational mapping):<ul><li>以Python类形式定义你的数据模型，ORM将模型与 关系数据库连接起来，你将得到一个非常容易使用的数据库API，同时你也可以在Django中使用原始的 SQL语句。</li></ul></li><li>URL 分派:<ul><li>使用正则表达式匹配URL，你可以设计任意的URL，没有框架的特定限定。像你喜欢的一样 灵活。 </li></ul></li><li>模版系统:<ul><li>使用Django强大而可扩展的模板语言，可以分隔设计、内容和Python代码。并且具有可继 承性。 </li></ul></li><li>表单处理:<ul><li>你可以方便的生成各种表单模型，实现表单的有效性检验。可以方便的从你定义的模型实例 生成相应的表单。</li></ul></li><li>Cache系统:<ul><li>可以挂在内存缓冲或其它的框架实现超级缓冲 – 实现你所需要的粒度。 </li></ul></li><li>会话(session)，用户登录与权限检查，快速开发用户会话功能。 </li><li>国际化:<ul><li>内置国际化系统，方便开发出多种语言的网站。 </li></ul></li><li>自动化的管理界面:<ul><li>不需要你花大量的工作来创建人员管理和更新内容。Django自带一个ADMIN site, 类似于内容管理系统</li></ul></li></ul><h3 id="工作机制"><a href="#工作机制" class="headerlink" title="工作机制"></a>工作机制</h3><p><img src="//angeszhu.github.io/2019/06/01/django-info/1.png" alt></p><p>1.用manage .py runserver 启动Django服务器时就载入了在同一目录下的settings .py。该文件包含了项目 中的配置信息，如前面讲的URLConf等，其中最重要的配置就是ROOT_URLCONF，它告诉Django哪个 Python模块应该用作本站的URLConf，默认的是urls .py<br>2.当访问url的时候，Django会根据ROOT_URLCONF的设置来装载URLConf。 3.然后按顺序逐个匹配URLConf里的URLpatterns。如果找到则会调用相关联的视图函数，并把<br>HttpRequest对象作为第一个参数(通常是request) 4.最后该view函数负责返回一个HttpResponse对象</p><h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><p>(点击可进入)</p><p><a href="http://djangobook.py3k.cn/2.0/" target="_blank" rel="noopener">The Django Book</a></p><p><a href="https://www.djangoproject.com/" target="_blank" rel="noopener">Django官方网站</a></p><p><a href="https://docs.djangoproject.com/zh-hans/2.2/intro/tutorial01/" target="_blank" rel="noopener">Django官方文档</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术栈 </category>
+          
+          <category> Django </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Django </tag>
+            
+            <tag> Python </tag>
+            
+            <tag> Web框架 </tag>
+            
+            <tag> 测试开发 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Python环境的安装</title>
       <link href="/2019/05/31/install-python/"/>
       <url>/2019/05/31/install-python/</url>
