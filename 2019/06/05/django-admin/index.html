@@ -1057,7 +1057,29 @@
 <p>指定要使用的数据库。默认为default。</p>
 <hr>
 <h4 id="django-contrib-gis"><a href="#django-contrib-gis" class="headerlink" title="django.contrib.gis"></a>django.contrib.gis</h4><h5 id="ogrinspect"><a href="#ogrinspect" class="headerlink" title="ogrinspect"></a>ogrinspect</h5><p>此命令仅在安装GeoDjango （django.contrib.gis）时可用。</p>
-<p>请参阅descriptionGeoDjango文档中的内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin ogrinspect data_source model_name</span><br></pre></td></tr></table></figure>
+
+<p>该ogrinspect管理命令将检查给定的OGR兼容 DataSource（例如shapefile文件），并会输出一个GeoDjango内置模型，模型名。</p>
+<p><strong>–blank BLANK</strong></p>
+<p>使用逗号分隔的OGR字段名称列表将blank=True 关键字选项添加到字段定义中。设置true为适用于所有适用的字段。</p>
+<p><strong>–decimal DECIMAL</strong></p>
+<p>使用逗号分隔的OGR浮点字段列表来生成 DecimalField而不是默认值 FloatField。设置为true应用于所有OGR浮点字段。</p>
+<p><strong>–geom-name GEOM_NAME</strong></p>
+<p>指定要用于几何字段的模型属性名称。默认为’geom’。</p>
+<p><strong>–layer LAYER_KEY</strong></p>
+<p>用于指定DataSource要使用的OGR 源中的哪个层的关键 。默认为0（第一层）。可以是整数或字符串标识符Layer。检查数据库时， layer通常是要检查的表名。</p>
+<p><strong>–mapping</strong></p>
+<p>自动生成用于的映射字典 LayerMapping。</p>
+<p><strong>–multi-geom</strong></p>
+<p>生成几何字段时，将其视为几何集合。例如，如果启用此设置，则a MultiPolygonField将放置在生成的模型中而不是 PolygonField。</p>
+<p><strong>–name-field NAME_FIELD</strong></p>
+<p><strong>str</strong>()在模型上生成一个返回给定字段名称的方法。</p>
+<p><strong>–no-imports</strong></p>
+<p>禁止import语句。from django.contrib.gis.db import models</p>
+<p><strong>–null NULL</strong></p>
+<p>使用逗号分隔的OGR字段名称列表将null=True 关键字选项添加到字段定义中。设置true为适用于所有适用的字段。</p>
+<p><strong>–srid SRID</strong></p>
+<p>用于几何字段的SRID。如果未设置，则ogrinspect尝试自动确定数据源的SRID。</p>
 <hr>
 <h4 id="django-contrib-sessions"><a href="#django-contrib-sessions" class="headerlink" title="django.contrib.sessions"></a>django.contrib.sessions</h4><h5 id="clearsessions"><a href="#clearsessions" class="headerlink" title="clearsessions"></a>clearsessions</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin clearsessions</span><br></pre></td></tr></table></figure>
 
@@ -1325,7 +1347,7 @@
     <div class="new-meta-box">
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-06-05T22:10:40+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-06-05T22:16:19+08:00">
   <a class="notlink">
     <i class="fas fa-clock" aria-hidden="true"></i>
     <p>last updated at Jun 5, 2019</p>
