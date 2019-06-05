@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>django-admin和manage.py | Anges Zhu</title>
+  
+  
+  <meta name="description" content="Django中管理任务的命令行的实用程序详解。">
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/css/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class="cover post half">
+      
+        
+  <h1 class="title">Anges's Garden</h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder>
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class="menu navgation">
+  <ul class="h-list">
+    
+      
+        <li>
+          <a class="nav home" href="/" id="home">
+            <i class="fas fa-rss fa-fw"></i>&nbsp;博文
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/archives/" id="archives">
+            <i class="fas fa-archive fa-fw"></i>&nbsp;归档
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/" id="categories">
+            <i class="fas fa-code-branch fa-fw"></i>&nbsp;分类
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/friends/" rel="nofollow" id="friends">
+            <i class="fas fa-link fa-fw"></i>&nbsp;友链
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/about/" rel="nofollow" id="about">
+            <i class="fas fa-info-circle fa-fw"></i>&nbsp;关于
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class="wrapper">
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href="/">
+        
+          Anges Zhu
+        
+      </a>
+			<div class="menu navgation">
+				<ul class="h-list">
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/" id="home">
+									<i class="fas fa-grin fa-fw"></i>&nbsp;博文
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/" rel="nofollow" id="categories">
+									<i class="fas fa-folder-open fa-fw"></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/tags/" rel="nofollow" id="tags">
+									<i class="fas fa-hashtag fa-fw"></i>&nbsp;标签
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/archives/" rel="nofollow" id="archives">
+									<i class="fas fa-archive fa-fw"></i>&nbsp;归档
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search">
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class="switcher h-list">
+				
+					<li class="s-search"><a class="fas fa-search fa-fw" href="javascript:void(0)"></a></li>
+				
+				<li class="s-menu"><a class="fas fa-bars fa-fw" href="javascript:void(0)"></a></li>
+			</ul>
+		</div>
+
+		<div class="nav-sub container container--flex">
+			<a class="logo flat-box"></a>
+			<ul class="switcher h-list">
+				<li class="s-comment"><a class="flat-btn fas fa-comments fa-fw" href="javascript:void(0)"></a></li>
+        
+          <li class="s-toc"><a class="flat-btn fas fa-list fa-fw" href="javascript:void(0)"></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/" id="home">
+								<i class="fas fa-clock fa-fw"></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/" rel="nofollow" id="archives">
+								<i class="fas fa-archive fa-fw"></i>&nbsp;文章归档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/projects/" id="projects">
+								<i class="fas fa-code-branch fa-fw"></i>&nbsp;开源项目
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/friends/" rel="nofollow" id="friends">
+								<i class="fas fa-link fa-fw"></i>&nbsp;我的友链
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="https://xaoxuu.com/wiki/material-x/" rel="nofollow" id="https:xaoxuu.comwikimaterial-x">
+								<i class="fas fa-book fa-fw"></i>&nbsp;主题文档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/about/" rel="nofollow" id="about">
+								<i class="fas fa-info-circle fa-fw"></i>&nbsp;关于小站
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class="l_main">
+  
+
+  
+    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2019/06/05/django-admin/">
+        django-admin和manage.py
+      </a>
+    </h1>
+  
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="https://angeszhu.github.io" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>Anges Zhu</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-06-05</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/技术栈/Django/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>技术栈&nbsp;/&nbsp;Django</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class="notlink">
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          <h2 id="django-admin和manage-py"><a href="#django-admin和manage-py" class="headerlink" title="django-admin和manage.py"></a>django-admin和manage.py</h2><blockquote>
+<p>django-admin是Django用于管理任务的命令行实用程序。</p>
+</blockquote>
+<blockquote>
+<p>manage.py在每个Django项目中自动创建。</p>
+</blockquote>
+<blockquote>
+<p>django-admin但也设置了 DJANGO_SETTINGS_MODULE环境变量，以便它指向项目的settings.py文件。</p>
+</blockquote>
+<blockquote>
+<p>通常，在处理单个Django项目时，它manage.py比django-admin使用起来更容易。如果您需要多个Django配置文件之间切换，使用django-admin与 DJANGO_SETTINGS_MODULE或–settings命令行选项。</p>
+</blockquote>
+<blockquote>
+<p>本文档中的命令行示例django-admin用于保持一致，但任何示例都可以使用manage.py或 同样使用。python -m django</p>
+</blockquote>
+<h3 id="环境变量配置"><a href="#环境变量配置" class="headerlink" title="环境变量配置"></a>环境变量配置</h3><p><em>我们如果想要使用django-admin或者manage.py，那么则需要为它配置环境变量。</em></p>
+<p><em>但是在安装时，通常都是自动配置的。</em></p>
+<p><em>如果您不可以使用，那么请配置地址…/django/bin到环境变量中。</em></p>
+<p><em>对于怎么配置环境变量，就不多坠述了。</em></p>
+<h3 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ django-admin &lt;command&gt; [options]</span><br><span class="line">$ manage.py &lt;command&gt; [options]</span><br><span class="line">$ python -m django &lt;command&gt; [options]</span><br></pre></td></tr></table></figure>
+
+<p><strong>command</strong>是本文档中列出的命令之一。 </p>
+<p><strong>options</strong>，是可选参数，应该是给定命令可用的零个或多个选项。</p>
+<h3 id="应用名称"><a href="#应用名称" class="headerlink" title="应用名称"></a>应用名称</h3><p>许多命令都会列出“应用名称”。</p>
+<p>“app name”是包含模型的包的基本名称。</p>
+<p>例如，如果您INSTALLED_APPS 包含字符串’mysite.blog’，则应用名称为blog。</p>
+<h3 id="版本-django-admin-version"><a href="#版本-django-admin-version" class="headerlink" title="版本 django-admin version"></a>版本 django-admin version</h3><p>运行以显示当前的Django版本。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin version</span><br></pre></td></tr></table></figure>
+
+<h3 id="显示调试输出"><a href="#显示调试输出" class="headerlink" title="显示调试输出"></a>显示调试输出</h3><p>使用 <strong>–verbosity</strong> 指定的该通知和调试信息量django-admin打印到控制台。</p>
+<hr>
+<h3 id="可用命令"><a href="#可用命令" class="headerlink" title="可用命令"></a>可用命令</h3><hr>
+<h4 id="check"><a href="#check" class="headerlink" title="check"></a>check</h4><p><strong>django-admin check [app_label [app_label …]]</strong></p>
+<p>使用系统检查框架检查整个Django项目是否存在常见问题。</p>
+<p>默认情况下，将检查所有应用。您可以通过提供应用标签列表作为参数来检查应用的子集：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin check auth admin myapp</span><br></pre></td></tr></table></figure>
+
+<p>如果您未指定任何应用，则会检查所有应用。</p>
+<p><strong>–tag TAGS, -t TAGS</strong></p>
+<p>系统检查框架执行许多不同类型的检查，这些检查使用标记进行分类。</p>
+<p>您可以使用这些标记将执行的检查限制为特定类别中的检查。例如，要仅执行模型和兼容性检查，请运行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin check --tag models --tag compatibility</span><br></pre></td></tr></table></figure>
+
+<p><strong>–list-tags</strong></p>
+<p>列出所有可用标签。</p>
+<p><strong>–deploy</strong></p>
+<p>激活一些仅在部署设置中相关的其他检查。</p>
+<p>您可以在本地开发环境中使用此选项，但由于您的本地开发设置模块可能没有很多生产设置，您可能希望将check命令指向不同的设置模块，可以通过设置<strong>DJANGO_SETTINGS_MODULE</strong>环境变量，也可以通过通过 <strong>–settings</strong> 选项：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin check --deploy --settings=production_settings</span><br></pre></td></tr></table></figure>
+
+<p>或者，您可以直接在生产或登台部署上运行它，以验证是否正在使用正确的设置（省略–settings）。您甚至可以将其作为集成测试套件的一部分。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--fail-level &#123;CRITICAL,ERROR,WARNING,INFO,DEBUG&#125;</span><br></pre></td></tr></table></figure>
+
+<p>指定将导致命令以非零状态退出的消息级别。默认是ERROR。</p>
+<hr>
+<h4 id="compilemessages"><a href="#compilemessages" class="headerlink" title="compilemessages"></a>compilemessages</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin compilemessages</span><br></pre></td></tr></table></figure>
+
+<p>编译.po通过创建的文件makemessages到.mo文件与内置的gettext支持使用。</p>
+<p>见国际化和本地化。</p>
+<p><strong>–locale LOCALE, -l LOCALE</strong></p>
+<p>指定要处理的区域设置。如果未提供，则处理所有语言环境。</p>
+<p><strong>–exclude EXCLUDE, -x EXCLUDE</strong></p>
+<p>指定要从处理中排除的区域设置。如果未提供，则不排除任何语言环境。</p>
+<p><strong>–use-fuzzy, -f</strong></p>
+<p>包括模糊转换为编译文件。用法示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">django-admin compilemessages --locale=pt_BR</span><br><span class="line">django-admin compilemessages --locale=pt_BR --locale=fr -f</span><br><span class="line">django-admin compilemessages -l pt_BR</span><br><span class="line">django-admin compilemessages -l pt_BR -l fr --use-fuzzy</span><br><span class="line">django-admin compilemessages --exclude=pt_BR</span><br><span class="line">django-admin compilemessages --exclude=pt_BR --exclude=fr</span><br><span class="line">django-admin compilemessages -x pt_BR</span><br><span class="line">django-admin compilemessages -x pt_BR -x fr</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="createcachetable"><a href="#createcachetable" class="headerlink" title="createcachetable"></a>createcachetable</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin createcachetable</span><br></pre></td></tr></table></figure>
+
+<p>使用设置文件中的信息创建用于数据库缓存后端的缓存表。</p>
+<p><strong>–database DATABASE</strong></p>
+<p>指定将在其中创建缓存表的数据库。默认为 default。</p>
+<p><strong>–dry-run</strong></p>
+<p>打印将在不实际运行的情况下运行的SQL，以便您可以自定义它或使用迁移框架。</p>
+<hr>
+<h4 id="dbshell"><a href="#dbshell" class="headerlink" title="dbshell"></a>dbshell</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin dbshell</span><br></pre></td></tr></table></figure>
+
+<p>运行在您指定的数据库引擎的命令行客户端 ENGINE的设置，在您指定的连接参数USER，PASSWORD等等，设置。</p>
+<ul>
+<li><p>对于PostgreSQL，它运行psql命令行客户端。</p>
+</li>
+<li><p>对于MySQL，它运行mysql命令行客户端。</p>
+</li>
+<li><p>对于SQLite，它运行sqlite3命令行客户端。</p>
+</li>
+<li><p>对于Oracle，这将运行sqlplus命令行客户端。</p>
+</li>
+</ul>
+<p>此命令假定程序对你的PATH，这样的程序名（一个简单的通话psql，mysql，sqlite3，sqlplus）会发现，在正确的地方节目。</p>
+<p>无法手动指定程序的位置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--database DATABASE</span><br></pre></td></tr></table></figure>
+
+<p>指定要在其上打开shell的数据库。默认为default。</p>
+<hr>
+<h4 id="diffsettings"><a href="#diffsettings" class="headerlink" title="diffsettings"></a>diffsettings</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin diffsettings</span><br></pre></td></tr></table></figure>
+
+<p>显示当前设置文件与Django默认设置（或指定的其他设置文件–default）之间的差异。</p>
+<p>默认设置中未显示的设置后跟”###”。</p>
+<p>例如，默认设置没有定义ROOT_URLCONF，因此 在输出中 ROOT_URLCONF后跟。<br>“###”diffsettings</p>
+<p><strong>–all</strong></p>
+<p>显示所有设置，即使它们具有Django的默认值。此类设置以前缀为前缀”###”。</p>
+<p><strong>–default MODULE</strong></p>
+<p>设置模块用于比较当前设置。留空以与Django的默认设置进行比较。</p>
+<p><strong>–output {hash,unified}</strong></p>
+<p>指定输出格式。可用值为hash和unified。 hash是显示上述输出的默认模式。 unified显示类似的输出。默认设置以减号为前缀，后跟带有加号前缀的更改设置。diff -u</p>
+<hr>
+<h4 id="dumpdata"><a href="#dumpdata" class="headerlink" title="dumpdata"></a>dumpdata</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin dumpdata [app_label[.ModelName] [app_label[.ModelName] ...]]</span><br></pre></td></tr></table></figure>
+
+<p>输出到标准输出与指定应用程序关联的数据库中的所有数据。</p>
+<p>如果未提供应用程序名称，则将转储所有已安装的应用程序。</p>
+<p>输出dumpdata可以用作输入loaddata。</p>
+<p>请注意，dumpdata使用模型上的默认管理器来选择要转储的记录。</p>
+<p>如果您使用自定义管理器作为默认管理器并且它过滤了一些可用记录，则不会转储所有对象。</p>
+<p><strong>–all, -a</strong></p>
+<p>使用Django的基本管理器，转储可能由自定义管理器过滤或修改的记录。</p>
+<p><strong>–format FORMAT</strong></p>
+<p>指定输出的序列化格式。默认为JSON。支持的格式以序列化格式列出。</p>
+<p><strong>–indent INDENT</strong></p>
+<p>指定要在输出中使用的缩进空格数。默认值 None显示单行上的所有数据。</p>
+<p><strong>–exclude EXCLUDE, -e EXCLUDE</strong></p>
+<p>防止app_label.ModelName转储特定应用程序或模型（以形式指定 ）。</p>
+<p>如果指定模型名称，则输出将限制为该模型，而不是整个应用程序。</p>
+<p>您还可以混合应用程序名称和型号名称。</p>
+<p>如果要排除多个应用程序，请多次传递–exclude：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin dumpdata --exclude=auth --exclude=contenttypes</span><br></pre></td></tr></table></figure>
+
+<p><strong>–database DATABASE</strong></p>
+<p>指定将从中转储数据的数据库。</p>
+<p>默认为default。</p>
+<p><strong>–natural-foreign</strong></p>
+<p>使用natural_key()模型方法序列化任何外键和与定义方法的类型的对象的多对多关系。</p>
+<p>如果要转储contrib.auth Permission对象或contrib.contenttypes ContentType对象，则应该使用此标志。</p>
+<p><strong>–natural-primary</strong></p>
+<p>忽略此对象的序列化数据中的主键，因为它可以在反序列化期间计算。</p>
+<p><strong>–pks PRIMARY_KEYS</strong></p>
+<p>仅输出由逗号分隔的主键列表指定的对象。这仅在转储一个模型时可用。</p>
+<p>默认情况下，输出模型的所有记录。</p>
+<p><strong>–output OUTPUT, -o OUTPUT</strong></p>
+<p>指定要将序列化数据写入的文件。默认情况下，数据转到标准输出。</p>
+<p>设置此选项且–verbosity大于0（默认值）时，终端中将显示进度条。</p>
+<hr>
+<h4 id="flush"><a href="#flush" class="headerlink" title="flush"></a>flush</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin flush</span><br></pre></td></tr></table></figure>
+
+<p>从数据库中删除所有数据并重新执行任何后同步处理程序。</p>
+<p>已清除已应用迁移的表。</p>
+<p>如果您希望从空数据库开始并重新运行所有迁移，则应删除并重新创建数据库，然后再运行migrate。</p>
+<p><strong>–noinput, –no-input</strong></p>
+<p>禁止所有用户提示。</p>
+<p><strong>–database DATABASE</strong></p>
+<p>指定要刷新的数据库。默认为default。</p>
+<hr>
+<h4 id="inspectdb"><a href="#inspectdb" class="headerlink" title="inspectdb"></a>inspectdb</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin inspectdb [table [table ...]]</span><br></pre></td></tr></table></figure>
+
+<p>反映NAME设置指向的数据库中的数据库表，并将 Django模型模块（<strong>models.py</strong> 文件）输出到标准输出。</p>
+<p>您可以通过将其名称作为参数传递来选择要检查的表或视图。</p>
+<p>如果未提供参数，则仅在使用该 <strong>–include-views</strong> 选项时才为视图创建模型。</p>
+<p>如果使用该 <strong>–include-partitions</strong> 选项，则在PostgreSQL上创建分区表的模型。</p>
+<p>如果您有一个遗留数据库，您可以使用它来使用Django。</p>
+<p>该脚本将检查数据库并为其中的每个表创建一个模型。</p>
+<p>正如您所料，创建的模型将具有表中每个字段的属性。</p>
+<p>请注意，inspectdb其字段名称输出中有一些特殊情况：</p>
+<ul>
+<li>如果inspectdb无法将列的类型映射到模型字段类型，它将使用TextField并将在生成的模型中的字段旁边插入Python注释 。</li>
+</ul>
+<p>已识别的字段可能取决于中列出的应用 。</p>
+<p>例如，添加了对几种PostgreSQL特定字段类型的识别。</p>
+<p>‘This field type is aguess.’INSTALLED_APPSdjango.contrib.postgres</p>
+<ul>
+<li>如果数据库列名是Python保留字（例如 ‘pass’，’class’或’for’），inspectdb则会附加’_field’ 到属性名称。</li>
+</ul>
+<p>例如，如果表具有列 ‘for’，则生成的模型将具有一个字段’for_field’，其db_column属性设置为’for’。inspectdb将在该字段旁边插入Python注释 。</p>
+<p>‘Field renamed because it was a Python reserved word.’</p>
+<p>此功能用作快捷方式，而不是确定的模型生成。</p>
+<p>运行它之后，您将需要自己查看生成的模型以进行自定义。</p>
+<p>特别是，您需要重新排列模型的顺序，以便正确排序引用其他模型的模型。</p>
+<p>当default在模型字段上指定a 时，Django不会创建数据库默认值 。</p>
+<p>同样，数据库默认值不会转换为模型字段默认值或以任何方式检测inspectdb。</p>
+<p>默认情况下，inspectdb创建非托管模型。</p>
+<p>也就是说， 在模型的类中告诉Django不要管理每个表的创建，修改和删除。</p>
+<p>如果你想让Django管理表的生命周期，你需要将选项更改 为（或者只是删除它，因为它是默认值）。managed = FalseMetamanagedTrueTrue</p>
+<h5 id="特定于数据库的注释"><a href="#特定于数据库的注释" class="headerlink" title="特定于数据库的注释"></a>特定于数据库的注释</h5><ul>
+<li><p>Oracle</p>
+<ul>
+<li>如果–include-views使用，则为物化视图创建模型。</li>
+</ul>
+</li>
+<li><p>PostgreSQL的</p>
+<ul>
+<li><p>为外表创建模型。</p>
+</li>
+<li><p>如果–include-views使用，则为物化视图创建模型 。</p>
+</li>
+<li><p>如果–include-partitions使用，则为分区表创建模型 。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>在Django 2.2中更改：增加了对外国表和物化视图的支持。</p>
+<p><strong>–database DATABASE</strong></p>
+<p>指定要内省的数据库。默认为default。</p>
+<p><strong>–include-partitions</strong></p>
+<p>Django 2.2中的新功能：</p>
+<p>如果提供此选项，还会为分区创建模型。仅实现了对PostgreSQL的支持。</p>
+<p><strong>–include-views</strong></p>
+<p>Django 2.1中的新功能：</p>
+<p>如果提供此选项，还会为数据库视图创建模型。</p>
+<hr>
+<h4 id="loaddata"><a href="#loaddata" class="headerlink" title="loaddata"></a>loaddata</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin loaddata fixture [fixture ...]</span><br></pre></td></tr></table></figure>
+
+<p>搜索并将指定fixture的内容加载到数据库中。</p>
+<p><strong>–database DATABASE</strong></p>
+<p>指定要将数据加载到的数据库。默认为 default。</p>
+<p><strong>–ignorenonexistent, -i</strong></p>
+<p>忽略自最初生成灯具后可能已删除的字段和模型。</p>
+<p><strong>–app APP_LABEL</strong></p>
+<p>指定单个应用程序以查找夹具而不是查看所有应用程序。</p>
+<p><strong>–format FORMAT</strong></p>
+<p>指定从stdin读取的装置的序列化格式（例如， json或xml）。</p>
+<p><strong>–exclude EXCLUDE, -e EXCLUDE</strong></p>
+<p>不包括从给定的应用程序和/或模型（以app_label或的形式app_label.ModelName）加载灯具。多次使用该选项可排除多个应用或型号。</p>
+<h5 id="什么是“夹具”？"><a href="#什么是“夹具”？" class="headerlink" title="什么是“夹具”？"></a>什么是“夹具”？</h5><p>一个夹具是包含数据库的序列化内容的文件的集合。</p>
+<p>每个夹具都有一个唯一的名称，构成夹具的文件可以分布在多个应用程序的多个目录中。</p>
+<p>Django将在三个地点搜索固定装置：</p>
+<ul>
+<li><p>在fixtures每个已安装的应用程序的目录中</p>
+</li>
+<li><p>在FIXTURE_DIRS设置中指定的任何目录中</p>
+</li>
+<li><p>在夹具命名的文字路径中</p>
+</li>
+</ul>
+<p>Django将加载它在这些位置匹配提供的灯具名称的任何和所有灯具。</p>
+<p>如果命名夹具具有文件扩展名，则仅加载该类型的夹具。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">django-admin loaddata mydata.json</span><br></pre></td></tr></table></figure>
+
+<p>只会加载调用的JSON装置mydata。夹具扩展必须对应于序列化器的注册名称 （例如，json或xml）。</p>
+<p>如果省略扩展，Django将搜索所有可用的夹具类型以获得匹配的夹具。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin loaddata mydata</span><br></pre></td></tr></table></figure>
+
+<p>会寻找任何夹具类型的任何夹具mydata。如果包含fixture目录mydata.json，该夹具将作为JSON fixture加载。</p>
+<p>命名的灯具可以包含目录组件。这些目录将包含在搜索路径中。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin loaddata foo/bar/mydata.json</span><br></pre></td></tr></table></figure>
+
+<p>将搜索<app_label>/fixtures/foo/bar/mydata.json每个已安装的应用程序， <dirname>/foo/bar/mydata.json每个目录FIXTURE_DIRS和文字路径foo/bar/mydata.json。</dirname></app_label></p>
+<p>处理夹具文件时，数据将按原样保存到数据库中。save()不调用模型定义的方法，并且将调用任何pre_save或 post_save信号，raw=True因为实例仅包含模型本地的属性。例如，您可能希望禁用访问夹具加载期间不存在的相关字段的处理程序，否则会引发异常：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from django.db.models.signals import post_savefrom .models import MyModel</span><br><span class="line"></span><br><span class="line">def my_handler(**kwargs):</span><br><span class="line">    # disable the handler during fixture loading</span><br><span class="line">    if kwargs[&apos;raw&apos;]:</span><br><span class="line">        return</span><br><span class="line">    ...</span><br><span class="line">post_save.connect(my_handler, sender=MyModel)</span><br></pre></td></tr></table></figure>
+
+<p>您还可以编写一个简单的装饰器来封装此逻辑：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">from functools import wraps</span><br><span class="line"></span><br><span class="line">def disable_for_loaddata(signal_handler):</span><br><span class="line">    &quot;&quot;&quot;    Decorator that turns off signal handlers when loading fixture data.    &quot;&quot;&quot;</span><br><span class="line">    @wraps(signal_handler)</span><br><span class="line">    def wrapper(*args, **kwargs):</span><br><span class="line">        if kwargs[&apos;raw&apos;]:</span><br><span class="line">            return</span><br><span class="line">        signal_handler(*args, **kwargs)</span><br><span class="line">    return wrapper</span><br><span class="line"></span><br><span class="line">@disable_for_loaddatadef my_handler(**kwargs):</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>请注意，无论何时对灯具进行反序列化，此逻辑都会禁用信号loaddata。</p>
+<p>请注意，处理夹具文件的顺序是未定义的。但是，所有夹具数据都作为单个事务安装，因此一个夹具中的数据可以引用另一个夹具中的数据。如果数据库后端支持行级约束，则将在事务结束时检查这些约束。</p>
+<p>该dumpdata命令可用于生成输入loaddata。</p>
+<hr>
+<h5 id="压缩灯具"><a href="#压缩灯具" class="headerlink" title="压缩灯具"></a>压缩灯具</h5><p>夹具可以被压缩zip，gz或bz2格式。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin loaddata mydata.json</span><br></pre></td></tr></table></figure>
+
+<p>会寻找任何的mydata.json，mydata.json.zip， mydata.json.gz，或mydata.json.bz2。</p>
+<p>使用zip压缩存档中包含的第一个文件。</p>
+<p>请注意，如果使用相同的名称但不同的灯具类型两场比赛被发现（例如，如果mydata.json和 mydata.xml.gz是在相同的固件目录中找到），灯具安装将被中止，并安装在调用任何数据 loaddata将被从数据库中删除。</p>
+<blockquote>
+<p>MySQL与MyISAM和灯具<br>MySQL的MyISAM存储引擎不支持事务或约束，因此如果使用MyISAM，您将无法获得夹具数据的验证，或者如果找到多个事务文件则回滚。</p>
+</blockquote>
+<hr>
+<h5 id="特定于数据库的灯具"><a href="#特定于数据库的灯具" class="headerlink" title="特定于数据库的灯具"></a>特定于数据库的灯具</h5><p>如果您处于多数据库设置中，则可能需要将夹具数据加载到一个数据库中，而不是加载到另一个数据库上。</p>
+<p>在这种情况下，您可以将数据库标识符添加到灯具的名称中。</p>
+<p>例如，如果您的DATABASES设置已定义“主”数据库，则命名夹具mydata.master.json或 mydata.master.json.gz仅在您指定要将数据加载到master数据库时才加载夹具。</p>
+<hr>
+<h5 id="从stdin加载灯具"><a href="#从stdin加载灯具" class="headerlink" title="从stdin加载灯具"></a>从stdin加载灯具</h5><p>您可以使用短划线作为夹具名称来加载输入sys.stdin。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin loaddata --format=json -</span><br></pre></td></tr></table></figure>
+
+<p>读取时stdin，–format需要选项指定 输入的序列化格式（例如，json或xml）。</p>
+<p>加载from stdin对标准输入和输出重定向很有用。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin dumpdata --format=json --database=test app_label.ModelName | django-admin loaddata --format=json --database=prod -</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="makemessages"><a href="#makemessages" class="headerlink" title="makemessages"></a>makemessages</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin makemessages</span><br></pre></td></tr></table></figure>
+
+<p>遍历当前目录的整个源树，并拉出标记为要进行转换的所有字符串。</p>
+<p>它在conf / locale（在Django树中）或locale（用于项目和应用程序）目录中创建（或更新）消息文件。</p>
+<p>在对消息文件进行更改之后，您需要将它们编译compilemessages为与builtin gettext支持一起使用。</p>
+<p>此命令不需要配置设置。</p>
+<p>但是，如果未配置设置，则命令不能忽略MEDIA_ROOT和 STATIC_ROOT目录或包含LOCALE_PATHS。</p>
+<p><strong>–all, -a</strong></p>
+<p>更新所有可用语言的消息文件。</p>
+<p><strong>–extension EXTENSIONS, -e EXTENSIONS</strong></p>
+<p>指定要检查的文件扩展名列表（默认：html，txt， py或者js如果–domain是js）。用法示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin makemessages --locale=de --extension xhtml</span><br></pre></td></tr></table></figure>
+
+<p>用逗号分隔多个扩展名或使用-e或–extension 多次：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin makemessages --locale=de --extension=html,txt --extension xml</span><br></pre></td></tr></table></figure>
+
+<p><strong>–locale LOCALE, -l LOCALE</strong></p>
+<p>指定要处理的区域设置。</p>
+<p><strong>–exclude EXCLUDE, -x EXCLUDE</strong></p>
+<p>指定要从处理中排除的区域设置。如果未提供，则不排除任何语言环境。</p>
+<p>用法示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">django-admin makemessages --locale=pt_BR</span><br><span class="line">django-admin makemessages --locale=pt_BR --locale=fr</span><br><span class="line">django-admin makemessages -l pt_BR</span><br><span class="line">django-admin makemessages -l pt_BR -l fr</span><br><span class="line">django-admin makemessages --exclude=pt_BR</span><br><span class="line">django-admin makemessages --exclude=pt_BR --exclude=f</span><br><span class="line">rdjango-admin makemessages -x pt_BR</span><br><span class="line">django-admin makemessages -x pt_BR -x fr</span><br></pre></td></tr></table></figure>
+
+<p><strong>–domain DOMAIN, -d DOMAIN</strong></p>
+<p>指定消息文件的域。支持的选项是：</p>
+<ul>
+<li><p>django对于所有<em>.py，</em>.html和*.txt文件（默认）</p>
+</li>
+<li><p>djangojs对于*.js文件</p>
+</li>
+</ul>
+<p><strong>–symlinks, -s</strong></p>
+<p>在查找新的翻译字符串时，遵循符号链接到目录。用法示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">django-admin makemessages --locale=de --symlinks</span><br></pre></td></tr></table></figure>
+
+<p><strong>–ignore PATTERN, -i PATTERN</strong></p>
+<p>忽略与给定glob样式模式匹配的文件或目录。多次使用可忽略更多。</p>
+<p>这些模式是默认使用：’CVS’，’.<em>‘，’</em>~’，’*.pyc’。用法示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin makemessages --locale=en_US --ignore=apps/* --ignore=secret/*.html</span><br></pre></td></tr></table></figure>
+
+<p><strong>–no-default-ignore</strong></p>
+<p>禁用默认值</p>
+<p><strong>–ignore。–no-wrap</strong></p>
+<p>禁用将长消息行分成语言文件中的多行。</p>
+<p><strong>–no-location</strong></p>
+<p>禁止在语言文件中写入’ ‘注释行。</p>
+<p>使用此选项会使技术熟练的翻译人员更难理解每条消息的上下文。#: filename:line</p>
+<p><strong>–add-location [{full,file,never}]</strong></p>
+<p>控制语言文件中的注释行。如果选项是：#: filename:line</p>
+<ul>
+<li><p>full （默认情况下，如果没有给出）：这些行包括文件名和行号。</p>
+</li>
+<li><p>file：行号被省略。</p>
+</li>
+<li><p>never：线被抑制（相同–no-location）。</p>
+</li>
+</ul>
+<p>需要gettext0.19或更新。</p>
+<p><strong>–keep-pot</strong></p>
+<p>防止删除.pot在创建.po文件之前生成的 临时文件。这对于调试可能阻止创建最终语言文件的错误很有用。</p>
+<hr>
+<h4 id="makemigrations"><a href="#makemigrations" class="headerlink" title="makemigrations"></a>makemigrations</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin makemigrations [app_label [app_label ...]]</span><br></pre></td></tr></table></figure>
+
+<p>根据检测到的模型更改创建新的迁移。迁移文档中详细介绍了迁移，它们与应用程序的关系等 。</p>
+<p>提供一个或多个应用程序名称作为参数将限制为指定的应用程序创建的迁移以及所需的任何依赖项（例如，在另一端的表ForeignKey）。</p>
+<p>要将迁移添加到没有migrations目录makemigrations的应用程序，请使用该应用程序运行 app_label。</p>
+<p><strong>–noinput, –no-input</strong></p>
+<p>禁止所有用户提示。如果无法自动解决被抑制的提示，则该命令将以错误代码3退出。</p>
+<p><strong>–empty</strong></p>
+<p>输出指定应用程序的空迁移，以进行手动编辑。</p>
+<p>这适用于高级用户，除非您熟悉迁移格式，迁移操作以及迁移之间的依赖关系，否则不应使用此用户。</p>
+<p><strong>–dry-run</strong></p>
+<p>显示在不将任何迁移文件实际写入磁盘的情况下进行的迁移。</p>
+<p>使用此选项还将显示将要写入的完整迁移文件。</p>
+<p><strong>–verbosity 3–merge</strong></p>
+<p>可以修复迁移冲突。</p>
+<p><strong>–name NAME, -n NAME</strong></p>
+<p>允许命名生成的迁移，而不是使用生成的名称。该名称必须是有效的Python 标识符。</p>
+<p><strong>–no-header</strong></p>
+<blockquote>
+<p>Django 2.2中的新功能：</p>
+</blockquote>
+<p>生成没有Django版本和时间戳标头的迁移文件。</p>
+<p><strong>–check</strong></p>
+<p>makemigrations当检测到没有迁移的模型更改时，使退出处于非零状态。</p>
+<hr>
+<h4 id="migrate"><a href="#migrate" class="headerlink" title="migrate"></a>migrate</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin migrate [app_label] [migration_name]</span><br></pre></td></tr></table></figure>
+
+<p>使数据库状态与当前模型和迁移集同步。</p>
+<p>迁移文档中详细介绍了迁移，它们与应用程序的关系等 。</p>
+<p>此命令的行为根据提供的参数而更改：</p>
+<ul>
+<li><p>没有参数：所有应用程序都运行了所有迁移。</p>
+</li>
+<li><p><app_label>：指定的应用程序将运行其迁移，直至最近的迁移。这可能涉及由于依赖性而运行其他应用程序的迁移。</app_label></p>
+</li>
+<li><p><app_label> <migrationname>：将数据库架构置于应用命名迁移的状态，但不应用同一应用程序中的后续迁移。如果您之前已迁移过指定的迁移，则可能涉及取消应用迁移。使用该名称zero取消应用应用的所有迁移。</migrationname></app_label></p>
+</li>
+</ul>
+<p><strong>–database DATABASE</strong></p>
+<p>指定要迁移的数据库。默认为default。</p>
+<p><strong>–fake</strong></p>
+<p>将迁移标记为应用的目标迁移（遵循上述规则），但不实际运行SQL以更改数据库模式。</p>
+<p>这适用于高级用户在手动应用更改时直接操作当前迁移状态; </p>
+<p>请注意，使用–fake运行会导致将迁移状态表置于需要手动恢复以使迁移正确运行的状态。</p>
+<p><strong>–fake-initial</strong></p>
+<p>如果所有具有该CreateModel迁移中所有操作创建的模型名称的数据库表已存在，则允许Django跳过应用程序的初始迁移 。</p>
+<p>此选项适用于首次针对预先存在使用迁移的数据库运行迁移时使用。</p>
+<p>但是，此选项不会检查匹配的表名称之外的匹配数据库模式，因此只有在您确信现有模式与初始迁移中记录的模式匹配时才可以安全使用。</p>
+<p><strong>–plan</strong></p>
+<blockquote>
+<p>Django 2.2中的新功能：</p>
+</blockquote>
+<p>显示将对给定migrate 命令执行的迁移操作。</p>
+<p><strong>–run-syncdb</strong></p>
+<p>允许在不迁移的情况下为应用创建表。</p>
+<p>虽然不推荐这样做，但对于拥有数百个模型的大型项目，迁移框架有时会太慢。</p>
+<p><strong>–noinput, –no-input</strong></p>
+<p>禁止所有用户提示。示例提示是询问有关删除陈旧内容类型的问题。</p>
+<hr>
+<h4 id="runserver"><a href="#runserver" class="headerlink" title="runserver"></a>runserver</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin runserver [addrport]</span><br></pre></td></tr></table></figure>
+
+<p>在本地计算机上启动轻量级开发Web服务器。</p>
+<p>默认情况下，服务器在IP地址的端口8000上运行127.0.0.1。</p>
+<p>您可以明确传入IP地址和端口号。</p>
+<p>如果以具有普通权限的用户身份运行此脚本（推荐），则可能无权在低端口号上启动端口。</p>
+<p>低端口号保留给超级用户（root）。</p>
+<p>此服务器使用该WSGI_APPLICATION设置指定的WSGI应用程序对象 。</p>
+<p>请勿在生产设置中使用此服务器。</p>
+<p>它没有经过安全审核或性能测试。（这就是它将如何保留。我们的业务是制作Web框架，而不是<br>Web服务器，因此改进此服务器以便能够处理生产环境超出了Django的范围。）</p>
+<p>根据需要，开发服务器会自动为每个请求重新加载Python代码。</p>
+<p>您无需重新启动服务器即可使代码更改生效。</p>
+<p>但是，某些操作（如添加文件）不会触发重新启动，因此在这些情况下您必须重新启动服务器。</p>
+<p>如果您正在使用Linux或MacOS并同时安装pywatchman和 Watchman服务，则内核信号将用于自动加载服务器（而不是每秒轮询文件修改时间戳）。</p>
+<p>这为大型项目提供了更好的性能，减少了代码更改后的响应时间，更强大的变更检测以及降低了功耗。</p>
+<blockquote>
+<p>包含许多文件的大型目录可能会导致性能问题<br>当Watchman使用包含大型非Python目录的项目时，node_modules建议忽略此目录以获得最佳性能。有关如何执行此操作的信息，请参阅watchman文档。</p>
+</blockquote>
+<blockquote>
+<p>watchman超时<br>Watchman客户端的默认超时为5秒。您可以通过设置DJANGO_WATCHMAN_TIMEOUT环境变量来更改它。</p>
+</blockquote>
+<blockquote>
+<p>在Django 2.2中更改：<br>Watchman支持取代了对pyinotify的支持。</p>
+</blockquote>
+<p>当您启动服务器时，每次在服务器运行时更改Python代码时，系统检查框架将检查整个Django项目是否存在一些常见错误。如果发现任何错误，它们将打印到标准输出。</p>
+<p>您可以根据需要运行任意数量的并发服务器，只要它们位于不同的端口上即可。只需执行多次。django-admin runserver</p>
+<p>请注意，127.0.0.1无法从网络上的其他计算机访问默认IP地址。要使您的开发服务器可以在网络上的其他计算机上查看，请使用其自己的IP地址（例如192.168.2.1）或 0.0.0.0或::（启用IPv6）。</p>
+<p>您可以提供括号括起来的IPv6地址（例如[200a::1]:8000）。这将自动启用IPv6支持。</p>
+<p>也可以使用包含仅ASCII字符的主机名。</p>
+<p>如果启用了staticfiles contrib app（新项目中的默认值），runserver则将使用自己的runserver命令覆盖该命令。</p>
+<p>记录每个请求和服务器的响应将发送到 django.server记录器。</p>
+<p><strong>–noreload</strong></p>
+<p>禁用自动重新加载器。这意味着如果特定的Python模块已经加载到内存中，那么在服务器运行时所做的任何Python代码更改都不会生效。</p>
+<p><strong>–nothreading</strong></p>
+<p>禁用在开发服务器中使用线程。默认情况下，服务器是多线程的。</p>
+<p><strong>–ipv6, -6</strong></p>
+<p>将IPv6用于开发服务器。这会将默认IP地址更改 127.0.0.1为::1。</p>
+<h5 id="使用不同端口和地址的示例"><a href="#使用不同端口和地址的示例" class="headerlink" title="使用不同端口和地址的示例"></a>使用不同端口和地址的示例</h5><p>IP地址上的端口8000 127.0.0.1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin runserver</span><br></pre></td></tr></table></figure>
+
+<p>IP地址上的端口8000 1.2.3.4：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin runserver 1.2.3.4:8000</span><br></pre></td></tr></table></figure>
+
+<p>IP地址上的端口7000 127.0.0.1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin runserver 7000</span><br></pre></td></tr></table></figure>
+
+<p>IP地址上的端口7000 1.2.3.4：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin runserver 1.2.3.4:7000</span><br></pre></td></tr></table></figure>
+
+<p>IPv6地址上的端口8000 ::1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin runserver -6</span><br></pre></td></tr></table></figure>
+
+<p>IPv6地址上的端口7000 ::1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin runserver -6 7000</span><br></pre></td></tr></table></figure>
+
+<p>IPv6地址上的端口7000 2001:0db8:1234:5678::9：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin runserver [2001:0db8:1234:5678::9]:7000</span><br></pre></td></tr></table></figure>
+
+<p>主机IPv4地址上的端口8000 localhost：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin runserver localhost:8000</span><br></pre></td></tr></table></figure>
+
+<p>主机IPv6地址上的端口8000 localhost：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin runserver -6 localhost:8000</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>使用开发服务器提供静态文件</strong><br>默认情况下，开发服务器不为您的站点提供任何静态文件（例如CSS文件，图像，MEDIA_URL等等）。如果要配置Django以提供静态媒体，请阅读 管理静态文件（比如图片，JavaScript，CSS）。</p>
+</blockquote>
+<hr>
+<h4 id="sendtestemail"><a href="#sendtestemail" class="headerlink" title="sendtestemail"></a>sendtestemail</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin sendtestemail [email [email ...]]</span><br></pre></td></tr></table></figure>
+
+<p>向指定的收件人发送测试电子邮件（以确认通过Django发送的电子邮件正在发送）。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin sendtestemail foo@example.com bar@example.com</span><br></pre></td></tr></table></figure>
+
+<p>有几个选项，您可以将它们的任意组合使用在一起：</p>
+<p><strong>–managers</strong></p>
+<p>邮件中指定的电子邮件地址MANAGERS使用 mail_managers()。</p>
+<p><strong>–admins</strong></p>
+<p>邮件中指定的电子邮件地址ADMINS使用 mail_admins()。</p>
+<hr>
+<h4 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin shell</span><br></pre></td></tr></table></figure>
+
+<p>启动Python交互式解释器。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--interface &#123;ipython,bpython,python&#125;, -i &#123;ipython,bpython,python&#125;</span><br></pre></td></tr></table></figure>
+
+<p>指定要使用的shell。默认情况下，如果安装了任何一个，Django将使用IPython或bpython。如果两者都已安装，请指定您想要的那样：<br>IPython的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin shell -i ipython</span><br></pre></td></tr></table></figure>
+
+<p>bpython：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin shell -i bpython</span><br></pre></td></tr></table></figure>
+
+<p>如果您安装了“丰富”shell，但想强制使用“普通”Python解释器，请使用python接口名称，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin shell -i python</span><br></pre></td></tr></table></figure>
+
+<p><strong>–nostartup</strong></p>
+<p>禁用读取“普通”Python解释器的启动脚本。默认情况下，脚本指向的脚本PYTHONSTARTUP环境变量或~/.pythonrc.py脚本被读取。</p>
+<p><strong>–command COMMAND, -c COMMAND</strong></p>
+<p>允许您将命令作为字符串传递给Django执行它，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin shell --command=&quot;import django; print(django.__version__)&quot;</span><br></pre></td></tr></table></figure>
+
+<p>您还可以在标准输入上传递代码以执行它。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ django-admin shell &lt;&lt;EOF</span><br><span class="line">&gt; import django</span><br><span class="line">&gt; print(django.__version__)</span><br><span class="line">&gt; EOF</span><br></pre></td></tr></table></figure>
+
+<p>在Windows上，由于select.select()该平台的实施限制，输出REPL 。</p>
+<hr>
+<h4 id="showmigrations"><a href="#showmigrations" class="headerlink" title="showmigrations"></a>showmigrations</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin showmigrations [app_label [app_label ...]]</span><br></pre></td></tr></table></figure>
+
+<p>显示项目中的所有迁移。您可以选择以下两种格式之一：</p>
+<p><strong>–list, -l</strong></p>
+<p>列出Django所知道的所有应用程序，每个应用程序可用的迁移，以及是否应用每个迁移（由[X]迁移名称旁边标记）。</p>
+<p>还会列出没有迁移的应用，但会在其下方打印。(no migrations)</p>
+<p>这是默认输出格式。</p>
+<p><strong>–plan, -p</strong></p>
+<p>显示Django将遵循的迁移计划以应用迁移。比如 –list，应用的迁移标记为[X]。对于–verbosity 2及以上的a，还将显示迁移的所有依赖关系。</p>
+<p>app_labels参数限制输出，但是，也可以包括提供的应用程序的依赖性。</p>
+<p><strong>–database DATABASE</strong></p>
+<p>指定要检查的数据库。默认为default。</p>
+<h4 id="sqlflush"><a href="#sqlflush" class="headerlink" title="sqlflush"></a>sqlflush</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin sqlflush</span><br></pre></td></tr></table></figure>
+
+<p>打印将为该flush 命令执行的SQL语句。</p>
+<p><strong>–database DATABASE</strong></p>
+<p>指定要为其打印SQL的数据库。默认为default。</p>
+<hr>
+<h4 id="sqlmigrate"><a href="#sqlmigrate" class="headerlink" title="sqlmigrate"></a>sqlmigrate</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin sqlmigrate app_label migration_name</span><br></pre></td></tr></table></figure>
+
+<p>打印指定迁移的SQL。这需要一个活动的数据库连接，它将用于解析约束名称; 这意味着您必须针对您希望稍后应用它的数据库副本生成SQL。</p>
+<p>请注意，sqlmigrate它不会使其输出着色。</p>
+<p><strong>–backwards</strong></p>
+<p>生成用于取消应用迁移的SQL。默认情况下，创建的SQL用于在向前方向上运行迁移。</p>
+<p><strong>–database DATABASE</strong></p>
+<p>指定要为其生成SQL的数据库。默认为default。</p>
+<hr>
+<h4 id="sqlsequencereset"><a href="#sqlsequencereset" class="headerlink" title="sqlsequencereset"></a>sqlsequencereset</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin sqlsequencereset app_label [app_label ...]</span><br></pre></td></tr></table></figure>
+
+<p>打印SQL语句以重置给定应用程序名称的序列。</p>
+<p>序列是某些数据库引擎用于跟踪自动递增字段的下一个可用数字的索引。</p>
+<p>使用此命令生成SQL，该SQL将修复序列与其自动递增的字段数据不同步的情况。</p>
+<p><strong>–database DATABASE</strong></p>
+<p>指定要为其打印SQL的数据库。默认为default。</p>
+<hr>
+<h4 id="squashmigrations"><a href="#squashmigrations" class="headerlink" title="squashmigrations"></a>squashmigrations</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin squashmigrations app_label [start_migration_name] migration_name</span><br></pre></td></tr></table></figure>
+
+<p>如果可能的话，将迁移压缩到最少app_label并包括migration_name更少的迁移。</p>
+<p>由此产生的压扁迁移可以安全地与未取消的迁移一起生活。</p>
+<p>当start_migration_name给定，Django将只包括从迁移开始，包括这个迁移。这有助于减轻压缩RunPython和django.db.migrations.operations.RunSQL迁移操作的压缩。</p>
+<p><strong>–no-optimize</strong></p>
+<p>生成压缩迁移时禁用优化程序。</p>
+<p>默认情况下，Django将尝试优化迁移中的操作以减小生成的文件的大小。</p>
+<p>如果此过程失败或创建不正确的迁移，请使用此选项，但请同时提交有关行为的Django错误报告，因为优化是安全的。</p>
+<p><strong>–noinput, –no-input</strong></p>
+<p>禁止所有用户提示。</p>
+<p><strong>–squashed-name SQUASHED_NAME</strong></p>
+<p>设置压缩迁移的名称。省略时，名称基于第一次和最后一次迁移，_squashed_介于两者之间。</p>
+<p><strong>–no-header</strong></p>
+<blockquote>
+<p>Django 2.2中的新功能：</p>
+</blockquote>
+<p>生成没有Django版本和时间戳标头的压缩迁移文件。</p>
+<hr>
+<h4 id="startapp"><a href="#startapp" class="headerlink" title="startapp"></a>startapp</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startapp name [directory]</span><br></pre></td></tr></table></figure>
+
+<p>为当前目录或给定目标中的给定应用程序名称创建Django应用程序目录结构。</p>
+<p>默认情况下，新目录包含 models.py文件和其他应用程序模板文件。</p>
+<p>如果仅给出应用程序名称，则将在当前工作目录中创建应用程序目录。</p>
+<p>如果提供了可选目标，Django将使用该现有目录而不是创建新目录。</p>
+<p>您可以使用 ‘。’ 表示当前的工作目录。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startapp myapp /Users/jezdez/Code/myapp</span><br></pre></td></tr></table></figure>
+
+<p><strong>–template TEMPLATE</strong></p>
+<p>提供了路径与自定义应用程序模板文件或路径，以一个压缩文件（目录.tar.gz，.tar.bz2，.tgz，.tbz，.zip）包含应用程序模板文件。</p>
+<p>例如，这将在创建myapp应用程序时在给定目录中查找应用程序模板：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startapp --template=/Users/jezdez/Code/my_app_template myapp</span><br></pre></td></tr></table></figure>
+
+<p>Django的也将接受的URL（ ，http，https），ftp以与应用程序模板文件压缩档案，下载和上飞提取它们。</p>
+<p>例如，利用GitHub的功能将存储库公开为zip文件，您可以使用以下URL：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startapp --template=https://github.com/githubuser/django-app-template/archive/master.zip myapp</span><br></pre></td></tr></table></figure>
+
+<p><strong>–extension EXTENSIONS, -e EXTENSIONS</strong></p>
+<p>指定应使用模板引擎呈现应用程序模板中的哪些文件扩展名。默认为py。</p>
+<p><strong>–name FILES, -n FILES</strong></p>
+<p>指定–extension应使用模板引擎呈现应用程序模板中的哪些文件（以及匹配的文件 ）。默认为空列表。</p>
+<p>将用于所有匹配的文件是：template context</p>
+<ul>
+<li><p>传递给startapp命令的任何选项（在命令支持的选项中）</p>
+</li>
+<li><p>app_name - 传递给命令的应用程序名称</p>
+</li>
+<li><p>app_directory - 新创建的应用程序的完整路径</p>
+</li>
+<li><p>camel_case_app_name - 驼峰案例格式的应用程序名称</p>
+</li>
+<li><p>docs_version- 文档的版本：’dev’或’1.x’</p>
+</li>
+<li><p>django_version - Django的版本，例如<code>2.0.3</code></p>
+</li>
+</ul>
+<blockquote>
+<p>警告<br>当使用Django模板引擎（默认情况下所有<em>.py文件）呈现应用程序模板文件时，Django还将替换包含的所有杂散模板变量。例如，如果其中一个Python文件包含解释与模板呈现相关的特定功能的文档字符串，则可能会导致错误的示例。<br>若要解决此问题，您可以使用templatetag 模板标记“转义”模板语法的各个部分。<br>此外，为了允许包含Django模板语言语法的Python模板文件同时还防止打包系统尝试字节编译无效</em>.py文件，.py-tpl 将以重命名的模板文件重命名为.py。</p>
+</blockquote>
+<hr>
+<h4 id="startproject"><a href="#startproject" class="headerlink" title="startproject"></a>startproject</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject name [directory]</span><br></pre></td></tr></table></figure>
+
+<p>为当前目录或给定目标中的给定项目名创建Django项目目录结构。</p>
+<p>默认情况下，新目录包含 manage.py一个项目包（包含一个settings.py和其他文件）。</p>
+<p>如果仅给出项目名称，则将命名项目目录和项目包，<projectname>并在当前工作目录中创建项目目录。</projectname></p>
+<p>如果提供了可选目标，Django将使用该现有目录作为项目目录，并在其中创建manage.py项目包。</p>
+<p>使用 ‘。’ 表示当前的工作目录。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject myproject /Users/jezdez/Code/myproject_repo</span><br></pre></td></tr></table></figure>
+
+<p><strong>–template TEMPLATE</strong></p>
+<p>指定自定义项目模板的目录，文件路径或URL。startapp –template</p>
+<p><strong>–extension EXTENSIONS, -e EXTENSIONS</strong></p>
+<p>指定应使用模板引擎呈现项目模板中的哪些文件扩展名。默认为py。</p>
+<p><strong>–name FILES, -n FILES</strong></p>
+<p>指定–extension应使用模板引擎呈现项目模板中的哪些文件（以及匹配的文件 ）。默认为空列表。</p>
+<p>该采用的是：template context</p>
+<ul>
+<li><p>传递给startproject命令的任何选项（在命令支持的选项中）</p>
+</li>
+<li><p>project_name - 传递给命令的项目名称</p>
+</li>
+<li><p>project_directory - 新创建项目的完整路径</p>
+</li>
+<li><p>secret_key- SECRET_KEY设置的随机密钥</p>
+</li>
+<li><p>docs_version- 文档的版本：’dev’或’1.x’</p>
+</li>
+<li><p>django_version - Django的版本，例如<code>2.0.3</code></p>
+</li>
+</ul>
+<hr>
+<h4 id="test"><a href="#test" class="headerlink" title="test"></a>test</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin test [test_label [test_label ...]]</span><br></pre></td></tr></table></figure>
+
+<p>运行所有已安装应用的测试。</p>
+<p><strong>–failfast</strong></p>
+<p>在测试失败后立即停止运行测试并报告失败。</p>
+<p><strong>–testrunner TESTRUNNER</strong></p>
+<p>控制用于执行测试的测试运行器类。此值将覆盖设置提供的值TEST_RUNNER。</p>
+<p><strong>–noinput, –no-input</strong></p>
+<p>禁止所有用户提示。典型的提示是关于删除现有测试数据库的警告。</p>
+<hr>
+<h5 id="Test-runner-options"><a href="#Test-runner-options" class="headerlink" title="Test runner options"></a>Test runner options</h5><p>该test命令代表指定的接收选项 –testrunner。这些是默认测试运行器的选项： DiscoverRunner。</p>
+<p><strong>–keepdb, -k</strong></p>
+<p>在测试运行之间保留测试数据库。</p>
+<p>这样做的优点是可以跳过create和destroy操作，这可以大大减少运行测试的时间，特别是在大型测试套件中。</p>
+<p>如果测试数据库不存在，它将在第一次运行时创建，然后为每次后续运行保留。</p>
+<p>在运行测试套件之前，任何未应用的迁移也将应用于测试数据库。</p>
+<p><strong>–reverse, -r</strong></p>
+<p>按相反的执行顺序对测试用例进行排序。这可能有助于调试未正确隔离的测试的副作用。</p>
+<p>使用此选项时，将保留按测试类分组。</p>
+<p><strong>–debug-mode</strong></p>
+<p>将DEBUG设置设置True为运行测试之前。这可能有助于解决测试失败问题。</p>
+<p><strong>–debug-sql, -d</strong></p>
+<p>为失败的测试启用SQL日志记录。如果 –verbosity是2，则还输出传递测试中的查询。</p>
+<p><strong>–parallel [N]</strong></p>
+<p>在单独的并行进程中运行测试。</p>
+<p>由于现代处理器具有多个内核，因此可以更快地运行测试。</p>
+<p>默认情况下，–parallel每个核心运行一个进程 multiprocessing.cpu_count()。</p>
+<p>您可以通过将其作为选项的值（例如–parallel=4，或通过设置DJANGO_TEST_PROCESSES环境变量）来调整进程数。</p>
+<p>Django将测试用例 - unittest.TestCase子类 - 分发给子进程。</p>
+<p>如果测试用例少于配置的进程，Django将相应地减少进程数。</p>
+<p>每个进程都有自己的数据库。您必须确保不同的测试用例不访问相同的资源。</p>
+<p>例如，触摸文件系统的测试用例应该创建一个供自己使用的临时目录。</p>
+<p>此选项要求第三方tblib程序包正确显示回溯：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install tblib</span><br></pre></td></tr></table></figure>
+
+<p>Windows上不提供此功能。它也不适用于Oracle数据库后端。</p>
+<p>如果要pdb在调试测试时使用，则必须禁用并行执行（–parallel=1）。bdb.BdbQuit如果不这样，你会看到类似的东西。</p>
+<blockquote>
+<p>警告<br>当启用测试并行化并且测试失败时，Django可能无法显示异常回溯。这可能使调试变得困难。如果遇到此问题，请在不进行并行化的情况下运行受影响的测试，以查看故障的回溯。<br>这是一个已知的限制。它源于需要序列化对象以便在进程之间交换它们。</p>
+</blockquote>
+<p><strong>–tag TAGS</strong></p>
+<p>仅运行标有指定标签的测试。可以多次指定并结合使用。test </p>
+<p><strong>–exclude-tag–exclude-tag EXCLUDE_TAGS</strong></p>
+<p>排除标有指定标签的测试。可以多次指定并结合使用。test –tag</p>
+<hr>
+<h4 id="testserver"><a href="#testserver" class="headerlink" title="testserver"></a>testserver</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin testserver [fixture [fixture ...]]</span><br></pre></td></tr></table></figure>
+
+<p>runserver使用来自给定fixture的数据运行Django开发服务器（如）。</p>
+<p>例如，这个命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin testserver mydata.json</span><br></pre></td></tr></table></figure>
+
+<p>…将执行以下步骤：</p>
+<p>1.创建一个测试数据库，如在测试数据库。</p>
+<p>2.使用来自给定灯具的灯具数据填充测试数据库。</p>
+<p>3.运行Django开发服务器（如runserver），指向这个新创建的测试数据库而不是生产数据库。</p>
+<p>这在很多方面都很有用：</p>
+<ul>
+<li><p>在编写视图如何使用某些夹具数据进行单元测试时，您可以testserver手动使用Web浏览器中的视图进行交互。</p>
+</li>
+<li><p>假设您正在开发Django应用程序并拥有一个您希望与之交互的数据库的“原始”副本。您可以将数据库转储到fixture（使用dumpdata上面解释的命令），然后使用testserver该数据运行Web应用程序。通过这种安排，您可以灵活地以任何方式搞乱数据，因为您知道您所做的任何数据更改都只是针对测试数据库。</p>
+</li>
+</ul>
+<p>请注意，此服务器也不会自动检测对你的Python代码（如runserver不）。但是，它会检测模板的更改。</p>
+<p><strong>–addrport ADDRPORT</strong></p>
+<p>指定默认值为的其他端口或IP地址和端口 127.0.0.1:8000。此值遵循完全相同的格式，并且与runserver命令的参数具有完全相同的功能。</p>
+<p>例子：</p>
+<p>使用fixture1和在端口7000上运行测试服务器fixture2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">django-admin testserver --addrport 7000 fixture1 fixture2</span><br><span class="line">django-admin testserver fixture1 fixture2 --addrport 7000</span><br></pre></td></tr></table></figure>
+
+<p>（上面的陈述是等价的。我们将它们都包含在内，以证明选项是在夹具参数之前还是之后无关紧要。）</p>
+<p>使用test夹具在1.2.3.4:7000上运行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin testserver --addrport 1.2.3.4:7000 test</span><br></pre></td></tr></table></figure>
+
+<p><strong>–noinput, –no-input</strong></p>
+<p>禁止所有用户提示。典型的提示是关于删除现有测试数据库的警告。</p>
+<hr>
+<h3 id="应用程序提供的命令"><a href="#应用程序提供的命令" class="headerlink" title="应用程序提供的命令"></a>应用程序提供的命令</h3><p>某些命令仅在实现它们 的django.contrib应用程序 可用时才可用。本节按其应用程序对它们进行分组。enabled</p>
+<h4 id="django-contrib-auth"><a href="#django-contrib-auth" class="headerlink" title="django.contrib.auth"></a>django.contrib.auth</h4><h5 id="changepassword"><a href="#changepassword" class="headerlink" title="changepassword"></a>changepassword</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin changepassword [&lt;username&gt;]</span><br></pre></td></tr></table></figure>
+
+<p>此命令仅在安装了Django的身份验证系统（django.contrib.auth）时可用。</p>
+<p>允许更改用户密码。它会提示您为给定用户输入两次新密码。如果条目相同，则立即成为新密码。如果您未提供用户，该命令将尝试更改其用户名与当前用户匹配的密码。</p>
+<p><strong>–database DATABASE</strong></p>
+<p>指定要查询用户的数据库。默认为default。</p>
+<p>用法示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin changepassword ringo</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="createsuperuser"><a href="#createsuperuser" class="headerlink" title="createsuperuser"></a>createsuperuser</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin createsuperuser</span><br></pre></td></tr></table></figure>
+
+<p>此命令仅在安装了Django的身份验证系统（django.contrib.auth）时可用。</p>
+<p>创建超级用户帐户（具有所有权限的用户）。如果您需要创建初始超级用户帐户，或者需要以编程方式为站点生成超级用户帐户，这将非常有用。</p>
+<p>以交互方式运行时，此命令将提示输入新超级用户帐户的密码。以非交互方式运行时，不会设置密码，并且在为其手动设置密码之前，超级用户帐户将无法登录。</p>
+<p><strong>–username USERNAME</strong></p>
+<p><strong>–email EMAIL</strong></p>
+<p>可以使用命令行上的–username和–email参数提供新帐户的用户名和电子邮件地址。如果未提供其中任何一个，createsuperuser则在交互式运行时将提示它。</p>
+<p><strong>–database DATABASE</strong></p>
+<p>指定将保存超级用户对象的数据库。</p>
+<p>get_input_data()如果要自定义数据输入和验证，则可以对管理命令进行子类化并覆盖。</p>
+<p>例如，如果您有一个ForeignKeyin REQUIRED_FIELDS并希望允许创建实例而不是输入现有实例的主键，那么它可能很有用。</p>
+<hr>
+<h4 id="django-contrib-contenttypes"><a href="#django-contrib-contenttypes" class="headerlink" title="django.contrib.contenttypes"></a>django.contrib.contenttypes</h4><h5 id="remove-stale-contenttypes"><a href="#remove-stale-contenttypes" class="headerlink" title="remove_stale_contenttypes"></a>remove_stale_contenttypes</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin remove_stale_contenttypes</span><br></pre></td></tr></table></figure>
+
+<p>此命令仅在安装了Django的contenttypes app（django.contrib.contenttypes）时可用。</p>
+<p>删除数据库中的陈旧内容类型（来自已删除的模型）。依赖于已删除内容类型的任何对象也将被删除。在确认可以继续删除之前，将显示已删除对象的列表。</p>
+<p><strong>–database DATABASE</strong></p>
+<p>指定要使用的数据库。默认为default。</p>
+<hr>
+<h4 id="django-contrib-gis"><a href="#django-contrib-gis" class="headerlink" title="django.contrib.gis"></a>django.contrib.gis</h4><h5 id="ogrinspect"><a href="#ogrinspect" class="headerlink" title="ogrinspect"></a>ogrinspect</h5><p>此命令仅在安装GeoDjango （django.contrib.gis）时可用。</p>
+<p>请参阅descriptionGeoDjango文档中的内容。</p>
+<hr>
+<h4 id="django-contrib-sessions"><a href="#django-contrib-sessions" class="headerlink" title="django.contrib.sessions"></a>django.contrib.sessions</h4><h5 id="clearsessions"><a href="#clearsessions" class="headerlink" title="clearsessions"></a>clearsessions</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin clearsessions</span><br></pre></td></tr></table></figure>
+
+<p>可以作为cron作业运行，也可以直接清除过期的会话。</p>
+<hr>
+<h4 id="django-contrib-sitemaps"><a href="#django-contrib-sitemaps" class="headerlink" title="django.contrib.sitemaps"></a>django.contrib.sitemaps</h4><h5 id="ping-google"><a href="#ping-google" class="headerlink" title="ping_google"></a>ping_google</h5><p>此命令仅在安装Sitemaps framework（django.contrib.sitemaps）时可用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin ping_google [sitemap_url]</span><br></pre></td></tr></table></figure>
+
+<p>将站点地图应用程序添加到项目后，您还可以使用ping_google管理命令ping Google ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py ping_google [/sitemap.xml]</span><br></pre></td></tr></table></figure>
+
+<p><strong>–sitemap-uses-http</strong></p>
+<blockquote>
+<p>Django 2.2中的新功能：</p>
+</blockquote>
+<p>如果您的站点地图使用http而不是，请使用此选项https。</p>
+<hr>
+<h4 id="django-contrib-staticfiles"><a href="#django-contrib-staticfiles" class="headerlink" title="django.contrib.staticfiles"></a>django.contrib.staticfiles</h4><h5 id="collectstatic"><a href="#collectstatic" class="headerlink" title="collectstatic"></a>collectstatic</h5><p>仅当安装了静态文件application（django.contrib.staticfiles）时，此命令才可用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin collectstatic</span><br></pre></td></tr></table></figure>
+
+<p>将静态文件收集到STATIC_ROOT。</p>
+<p>默认情况下，重复文件名的解析方式与模板解析的工作方式类似：将首先使用在其中一个指定位置找到的文件。如果您感到困惑，该findstatic命令可以帮助您显示找到的文件。</p>
+<p>在后续collectstatic运行（如果STATIC_ROOT不为空）时，仅当文件的修改时间戳大于文件的时间戳时才复制文件STATIC_ROOT。因此，如果从中删除应用程序 INSTALLED_APPS，最好使用该选项以删除过时的静态文件。collectstatic –clear</p>
+<p>使用。搜索文件。默认值是中定义的所有地点寻找 ，并在由指定的应用程序的目录设置。enabled findersSTATICFILES_DIRS’static’INSTALLED_APPS</p>
+<p>的collectstatic管理命令调用 post_process() 的方法STATICFILES_STORAGE每次运行后，并传递的已发现由管理命令的路径列表。它还接收所有命令行选项collectstatic。ManifestStaticFilesStorage 默认情况下使用此选项。</p>
+<p>默认情况下，收集的文件从中接收权限，FILE_UPLOAD_PERMISSIONS并从中 收集目录FILE_UPLOAD_DIRECTORY_PERMISSIONS。如果您希望对这些文件和/或目录具有不同的权限，则可以将其中一个静态文件存储类子 类化，并分别指定 file_permissions_mode和/或directory_permissions_mode参数。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from django.contrib.staticfiles import storage</span><br><span class="line"></span><br><span class="line">class MyStaticFilesStorage(storage.StaticFilesStorage):</span><br><span class="line">    def __init__(self, *args, **kwargs):</span><br><span class="line">        kwargs[&apos;file_permissions_mode&apos;] = 0o640</span><br><span class="line">        kwargs[&apos;directory_permissions_mode&apos;] = 0o760</span><br><span class="line">        super().__init__(*args, **kwargs)</span><br></pre></td></tr></table></figure>
+
+<p>然后将STATICFILES_STORAGE设置设置为 ‘path.to.MyStaticFilesStorage’。</p>
+<p>一些常用的选项是：</p>
+<p><strong>–noinput, –no-input</strong></p>
+<p>不要提示用户输入任何类型。</p>
+<p><strong>–ignore PATTERN, -i PATTERN</strong></p>
+<p>忽略与此glob样式模式匹配的文件，目录或路径。多次使用可忽略更多。指定路径时，始终使用正斜杠，即使在Windows上也是如此。</p>
+<blockquote>
+<p>在Django 2.2中更改：<br>路径匹配已添加。</p>
+</blockquote>
+<p><strong>–dry-run, -n</strong></p>
+<p>做一切，除了修改文件系统。</p>
+<p><strong>–clear, -c</strong></p>
+<p>在尝试复制或链接原始文件之前清除现有文件。</p>
+<p><strong>–link, -l</strong></p>
+<p>创建指向每个文件的符号链接，而不是复制。</p>
+<p><strong>–no-post-process</strong></p>
+<p>不要调用已post_process() 配置的STATICFILES_STORAGE存储后端的 方法。</p>
+<p><strong>–no-default-ignore</strong></p>
+<p>不要忽略常见的私有glob样式模式’CVS’，’.<em>‘ 以及’</em>~’。</p>
+<p>有关选项的完整列表，请通过运行来参考命令自己的帮助：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python manage.py collectstatic --help</span><br></pre></td></tr></table></figure>
+
+<h5 id="自定义被忽略的模式列表"><a href="#自定义被忽略的模式列表" class="headerlink" title="自定义被忽略的模式列表"></a>自定义被忽略的模式列表</h5><p>默认忽略模式列表可以以比在每次调用时提供命令选项 更持久的方式进行自定义。提供自定义 类，覆盖此类的属性并替换 为您设置中的该类路径 ：[‘CVS’, ‘.<em>‘, ‘</em>~’]–ignorecollectstaticAppConfigignore_patterns’django.contrib.staticfiles’INSTALLED_APPS</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from django.contrib.staticfiles.apps import StaticFilesConfig</span><br><span class="line"></span><br><span class="line">class MyStaticFilesConfig(StaticFilesConfig):</span><br><span class="line">    ignore_patterns = [...]  # your custom ignore list</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="findstatic"><a href="#findstatic" class="headerlink" title="findstatic"></a>findstatic</h5><p>仅当安装了静态文件application（django.contrib.staticfiles）时，此命令才可用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin findstatic staticfile [staticfile ...]</span><br></pre></td></tr></table></figure>
+
+<p>使用启用的查找程序搜索一个或多个相对路径。</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ python manage.py findstatic css/base.css admin/js/core.js</span><br><span class="line">Found &apos;css/base.css&apos; here:</span><br><span class="line">  /home/special.polls.com/core/static/css/base.css</span><br><span class="line">  /home/polls.com/core/static/css/base.css</span><br><span class="line">Found &apos;admin/js/core.js&apos; here:</span><br><span class="line">  /home/polls.com/src/django/contrib/admin/media/js/core.js</span><br></pre></td></tr></table></figure>
+
+<p><strong>findstatic –first</strong></p>
+<p>默认情况下，找到所有匹配的位置。要仅返回每个相对路径的第一个匹配项，请使用以下–first选项：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ python manage.py findstatic css/base.css --first</span><br><span class="line">Found &apos;css/base.css&apos; here:</span><br><span class="line">  /home/special.polls.com/core/static/css/base.css</span><br></pre></td></tr></table></figure>
+
+<p>这是一个调试辅助工具; 它会向您显示将为给定路径收集哪个静态文件。</p>
+<p>通过将–verbosity标志设置为0，您可以抑制额外输出并获取路径名称：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ python manage.py findstatic css/base.css --verbosity 0</span><br><span class="line">/home/special.polls.com/core/static/css/base.css</span><br><span class="line">/home/polls.com/core/static/css/base.css</span><br></pre></td></tr></table></figure>
+
+<p>另一方面，通过将–verbosity标志设置为2，您可以获取所有搜索到的目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ python manage.py findstatic css/base.css --verbosity 2</span><br><span class="line">Found &apos;css/base.css&apos; here:</span><br><span class="line">  /home/special.polls.com/core/static/css/base.css</span><br><span class="line">  /home/polls.com/core/static/css/base.css</span><br><span class="line">Looking in the following locations:</span><br><span class="line">  /home/special.polls.com/core/static</span><br><span class="line">  /home/polls.com/core/static</span><br><span class="line">  /some/other/path/static</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="默认选项"><a href="#默认选项" class="headerlink" title="默认选项"></a>默认选项</h3><p>虽然某些命令可能允许自己的自定义选项，但每个命令都允许以下选项：</p>
+<p><strong>–pythonpath PYTHONPATH</strong></p>
+<p>将给定的文件系统路径添加到Python 导入搜索路径。如果未提供，django-admin则使用PYTHONPATH环境变量。此选项是不必要的manage.py，因为它负责为您设置Python路径。</p>
+<p>用法示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin migrate --pythonpath=&apos;/home/djangoprojects/myproject&apos;</span><br></pre></td></tr></table></figure>
+
+<p><strong>–settings SETTINGS</strong></p>
+<p>指定要使用的设置模块。设置模块应该是Python包语法，例如mysite.settings。如果未提供， django-admin则使用DJANGO_SETTINGS_MODULE环境变量。</p>
+<p>此选项是不必要的manage.py，因为它settings.py默认使用当前项目。</p>
+<p>用法示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin migrate --settings=mysite.settings</span><br></pre></td></tr></table></figure>
+
+<p><strong>–traceback</strong></p>
+<p>CommandError 引发a时显示完整的堆栈跟踪。默认情况下，django-admin将在CommandError发生时显示简单的错误消息，并在任何其他异常时显示 完整的堆栈跟踪。</p>
+<p>用法示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin migrate --traceback</span><br></pre></td></tr></table></figure>
+
+<p><strong>–verbosity {0,1,2,3}, -v {0,1,2,3}</strong></p>
+<p>指定命令应打印到控制台的通知和调试信息量。</p>
+<ul>
+<li><p>0 意味着没有输出。</p>
+</li>
+<li><p>1 表示正常输出（默认）。</p>
+</li>
+<li><p>2 表示详细输出。</p>
+</li>
+<li><p>3意味着非常详细的输出。</p>
+</li>
+</ul>
+<p>用法示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin migrate --verbosity 2</span><br></pre></td></tr></table></figure>
+
+<p><strong>–no-color</strong></p>
+<p>禁用彩色命令输出。某些命令将其输出格式化为彩色。例如，错误将以红色打印到控制台，SQL语句将突出显示语法。</p>
+<p>用法示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin runserver --no-color</span><br></pre></td></tr></table></figure>
+
+<p><strong>–force-color</strong></p>
+<blockquote>
+<p>Django 2.2中的新功能：</p>
+</blockquote>
+<p>如果它将被禁用，则强制命令输出的颜色化，如语法着色中所述。例如，您可能希望将彩色输出管道传输到另一个命令。</p>
+<hr>
+<h3 id="额外的细节"><a href="#额外的细节" class="headerlink" title="额外的细节"></a>额外的细节</h3><h4 id="语法着色"><a href="#语法着色" class="headerlink" title="语法着色"></a>语法着色</h4><p>如果终端支持ANSI色输出，django-admin/ manage.pycommands将使用漂亮的颜色编码输出。如果您将命令的输出传递给另一个程序，除非使用该–force-color选项，否则它不会使用颜色代码。</p>
+<p>在Windows下，本机控制台不支持ANSI转义序列，因此默认情况下没有颜色输出。但是你可以安装ANSICON 第三方工具，Django命令会检测它的存在，并将像在基于Unix的平台上一样利用其服务来进行颜色输出。</p>
+<p>用于语法突出显示的颜色可以自定义。Django配有三种调色板：</p>
+<ul>
+<li><p>dark，适合在黑色背景上显示白色文本的终端。这是默认调色板。</p>
+</li>
+<li><p>light，适合在白色背景上显示黑色文本的终端。</p>
+</li>
+<li><p>nocolor，禁用语法高亮显示。</p>
+</li>
+</ul>
+<p>您可以通过设置DJANGO_COLORS环境变量来指定要使用的调色板来选择调色板。例如，要light在Unix或OS / X BASH shell下指定调色板，可以在命令提示符下运行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export DJANGO_COLORS=&quot;light&quot;</span><br></pre></td></tr></table></figure>
+
+<p>您还可以自定义使用的颜色。Django指定了许多使用颜色的角色：</p>
+<ul>
+<li><p>error - 一个重大错误。</p>
+</li>
+<li><p>notice - 一个小错误。</p>
+</li>
+<li><p>success - 成功。</p>
+</li>
+<li><p>warning - 一个警告。</p>
+</li>
+<li><p>sql_field - SQL中模型字段的名称。</p>
+</li>
+<li><p>sql_coltype - SQL中模型字段的类型。</p>
+</li>
+<li><p>sql_keyword - SQL关键字。</p>
+</li>
+<li><p>sql_table - SQL中模型的名称。</p>
+</li>
+<li><p>http_info - 1XX HTTP信息服务器响应。</p>
+</li>
+<li><p>http_success - 2XX HTTP Success服务器响应。</p>
+</li>
+<li><p>http_not_modified - 304 HTTP未修改的服务器响应。</p>
+</li>
+<li><p>http_redirect - 304以外的3XX HTTP重定向服务器响应。</p>
+</li>
+<li><p>http_not_found - 404 HTTP未找到服务器响应。</p>
+</li>
+<li><p>http_bad_request - 除404之外的4XX HTTP错误请求服务器响应。</p>
+</li>
+<li><p>http_server_error - 5XX HTTP服务器错误响应。</p>
+</li>
+<li><p>migrate_heading - 迁移管理命令中的标题。</p>
+</li>
+<li><p>migrate_label - 迁移名称。</p>
+</li>
+</ul>
+<p>可以从以下列表中为每个角色分配特定的前景色和背景色：</p>
+<ul>
+<li><p>black</p>
+</li>
+<li><p>red</p>
+</li>
+<li><p>green</p>
+</li>
+<li><p>yellow</p>
+</li>
+<li><p>blue</p>
+</li>
+<li><p>magenta</p>
+</li>
+<li><p>cyan</p>
+</li>
+<li><p>white</p>
+</li>
+</ul>
+<p>然后可以使用以下显示选项修改这些颜色中的每一种：</p>
+<ul>
+<li><p>bold</p>
+</li>
+<li><p>underscore</p>
+</li>
+<li><p>blink</p>
+</li>
+<li><p>reverse</p>
+</li>
+<li><p>conceal</p>
+</li>
+</ul>
+<p>颜色规范遵循以下模式之一：</p>
+<ul>
+<li><p>role=fg</p>
+</li>
+<li><p>role=fg/bg</p>
+</li>
+<li><p>role=fg,option,option</p>
+</li>
+<li><p>role=fg/bg,option,option</p>
+</li>
+</ul>
+<p>其中role是有效颜色角色的名称，fg是前景颜色，bg是背景颜色，每个颜色option 都是颜色修改选项之一。然后用分号分隔多种颜色规格。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export DJANGO_COLORS=&quot;error=yellow/blue,blink;notice=magenta&quot;</span><br></pre></td></tr></table></figure>
+
+<p>将指定使用蓝色闪烁黄色显示错误，并使用洋红色显示通知。所有其他颜色角色将保持未着色。</p>
+<p>也可以通过扩展基础调色板来指定颜色。如果将调色板名称放在颜色规范中，则将加载该调色板隐含的所有颜色。所以：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export DJANGO_COLORS=&quot;light;error=yellow/blue,blink;notice=magenta&quot;</span><br></pre></td></tr></table></figure>
+
+<p>将指定使用浅色调色板中的所有颜色， 但错误和通知的颜色除外，这些颜色将按指定覆盖。</p>
+<hr>
+<h4 id="Bash完成"><a href="#Bash完成" class="headerlink" title="Bash完成"></a>Bash完成</h4><p>如果您使用Bash shell，请考虑安装Django bash完成脚本，该脚本extras/django_bash_completion位于Django源代码发行版中。它启用tab-completion django-admin和 manage.py命令，所以你可以，例如……</p>
+<ul>
+<li><p>类型django-admin。</p>
+</li>
+<li><p>按[TAB]查看所有可用选项。</p>
+</li>
+<li><p>键入sql，然后按[TAB]，查看名称以其开头的所有可用选项sql。</p>
+</li>
+</ul>
+<hr>
+<h2 id="从代码运行管理命令"><a href="#从代码运行管理命令" class="headerlink" title="从代码运行管理命令"></a>从代码运行管理命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django.core.management.call_command（name，* args，** options）</span><br></pre></td></tr></table></figure>
+
+<p>从代码使用中调用管理命令call_command。</p>
+<p><code>name</code></p>
+<p>要调用的命令的名称或命令对象。除非测试需要该对象，否则优先传递名称。</p>
+<p><code>*args</code></p>
+<p>命令接受的参数列表。参数传递给参数解析器，因此您可以使用与命令行相同的样式。例如，。call_command(‘flush’, ‘–verbosity=0’)</p>
+<p><code>**options</code></p>
+<p>命令行上接受的命名选项。选项传递给命令而不触发参数解析器，这意味着您需要传递正确的类型。例如，（零必须是整数而不是字符串）。call_command(‘flush’, verbosity=0)</p>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from django.core import management</span><br><span class="line">from django.core.management.commands import loaddata</span><br><span class="line"></span><br><span class="line">management.call_command(&apos;flush&apos;, verbosity=0, interactive=False)</span><br><span class="line">management.call_command(&apos;loaddata&apos;, &apos;test_data&apos;, verbosity=0)</span><br><span class="line">management.call_command(loaddata.Command(), &apos;test_data&apos;, verbosity=0)</span><br></pre></td></tr></table></figure>
+
+<p>请注意，不带参数的命令选项将作为带有True或的关键字传递False，如interactive上面的选项所示。</p>
+<p>可以使用以下语法之一传递命名参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># Similar to the command line</span><br><span class="line">management.call_command(&apos;dumpdata&apos;, &apos;--natural-foreign&apos;)</span><br><span class="line"></span><br><span class="line"># Named argument similar to the command line minus the initial dashes and</span><br><span class="line"># with internal dashes replaced by underscores</span><br><span class="line">management.call_command(&apos;dumpdata&apos;, natural_foreign=True)</span><br><span class="line"></span><br><span class="line"># `use_natural_foreign_keys` is the option destination variable</span><br><span class="line">management.call_command(&apos;dumpdata&apos;, use_natural_foreign_keys=True)</span><br></pre></td></tr></table></figure>
+
+<p>使用call_command()而不是django-admin或时，某些命令选项具有不同的名称manage.py。例如，转换为。要查找要用于的关键字参数名称 ，请检查传递给的参数的命令源代码。</p>
+<p>django-admin createsuperuser –no-inputcall_command(‘createsuperuser’, interactive=False)call_command()destparser.add_argument()</p>
+<p>采用多个选项的命令选项将传递给列表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">management.call_command(&apos;dumpdata&apos;, exclude=[&apos;contenttypes&apos;, &apos;auth&apos;])</span><br></pre></td></tr></table></figure>
+
+<p>所述的返回值call_command()的功能是一样的的返回值handle()的命令的方法。</p>
+<hr>
+<h3 id="输出重定向"><a href="#输出重定向" class="headerlink" title="输出重定向"></a>输出重定向</h3><p>请注意，您可以重定向标准输出和错误流，因为所有命令都支持stdout和stderr选项。</p>
+<p>例如，你可以写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">with open(&apos;/path/to/command_output&apos;, &apos;w&apos;) as f:</span><br><span class="line">    management.call_command(&apos;dumpdata&apos;, stdout=f)</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        
+          
+
+
+  <section class="meta" id="footer-meta">
+    <hr>
+    <div class="new-meta-box">
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-06-05T22:10:40+08:00">
+  <a class="notlink">
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>last updated at Jun 5, 2019</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Django/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>Django</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Python/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>Python</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Web框架/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>Web框架</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/测试开发/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>测试开发</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=https://angeszhu.github.io/2019/06/05/django-admin/&title=django-admin和manage.py | Anges Zhu&summary=">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://angeszhu.github.io/2019/06/05/django-admin/&title=django-admin和manage.py | Anges Zhu&summary=">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=https://angeszhu.github.io/2019/06/05/django-admin/&title=django-admin和manage.py | Anges Zhu&summary=">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+            <div class="prev-next">
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2019/06/03/regular-base/" rel="prev" title="正则表达式">
+                                    
+                                        正则表达式
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/正则表达式/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>正则表达式</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'django-admin和manage.py',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class="l_side">
+  
+    
+    
+      
+        
+          
+          
+            <section class="widget author">
+  <div class="content pure">
+    
+      <div class="avatar">
+        <img class="avatar" src="/img/my.jpg">
+      </div>
+    
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/" class="social fas fa-rss flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:ju_limeng@126.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/AngesZhu/" class="social fab fa-github flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://www.cnblogs.com/AngesZhu/" class="social fab fa-code-branch flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://study.163.com/provider/400000000674013/course.htm?share=2&shareId=400000000674013" class="social fas fa-book flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            <section class="widget grid">
+  
+<header class="pure">
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
+  
+</header>
+
+  <div class="content pure">
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/" id="home">
+          
+            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+          
+          近期文章
+        </a></li>
+      
+        <li><a class="flat-box" title="/archives/" href="/archives/" rel="nofollow" id="archives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          文章归档
+        </a></li>
+      
+        <li><a class="flat-box" title="/projects/" href="/projects/" id="projects">
+          
+            <i class="fas fa-code-branch fa-fw" aria-hidden="true"></i>
+          
+          开源项目
+        </a></li>
+      
+        <li><a class="flat-box" title="/friends/" href="/friends/" rel="nofollow" id="friends">
+          
+            <i class="fas fa-link fa-fw" aria-hidden="true"></i>
+          
+          我的友链
+        </a></li>
+      
+        <li><a class="flat-box" title="https://xaoxuu.com/wiki/material-x/" href="https://xaoxuu.com/wiki/material-x/" rel="nofollow" id="https:xaoxuu.comwikimaterial-x">
+          
+            <i class="fas fa-book fa-fw" aria-hidden="true"></i>
+          
+          主题文档
+        </a></li>
+      
+        <li><a class="flat-box" title="/about/" href="/about/" rel="nofollow" id="about">
+          
+            <i class="fas fa-info-circle fa-fw" aria-hidden="true"></i>
+          
+          关于小站
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class="widget category">
+    
+<header class="pure">
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  
+    <a class="rightBtn" rel="nofollow" href="/categories/" title="categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class="content pure">
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/技术栈/" href="/categories/技术栈/"><div class="name">技术栈</div><div class="badge">(7)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/技术栈/Django/" href="/categories/技术栈/Django/"><div class="name">Django</div><div class="badge">(5)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/技术栈/Python/" href="/categories/技术栈/Python/"><div class="name">Python</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/技术栈/正则表达式/" href="/categories/技术栈/正则表达式/"><div class="name">正则表达式</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/日常需要/" href="/categories/日常需要/"><div class="name">日常需要</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/日常需要/寻找目标/" href="/categories/日常需要/寻找目标/"><div class="name">寻找目标</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/日常需要/文档编写/" href="/categories/日常需要/文档编写/"><div class="name">文档编写</div><div class="badge">(1)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class="widget tagcloud">
+    
+<header class="pure">
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+    <a class="rightBtn" rel="nofollow" href="/tags/" title="tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class="content pure">
+      <a href="/tags/Django/" style="font-size: 19px; color: #777">Django</a> <a href="/tags/Markdown/" style="font-size: 14px; color: #999">Markdown</a> <a href="/tags/Python/" style="font-size: 24px; color: #555">Python</a> <a href="/tags/Web框架/" style="font-size: 19px; color: #777">Web框架</a> <a href="/tags/文档编写/" style="font-size: 14px; color: #999">文档编写</a> <a href="/tags/正则表达式/" style="font-size: 14px; color: #999">正则表达式</a> <a href="/tags/测试开发/" style="font-size: 19px; color: #777">测试开发</a> <a href="/tags/环境/" style="font-size: 14px; color: #999">环境</a> <a href="/tags/知识体系-学习方向-职业规划/" style="font-size: 14px; color: #999">知识体系 学习方向 职业规划</a>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class="widget toc-wrapper">
+    
+<header class="pure">
+  <div><i class="fas fa-list fa-fw fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;目录结构</div>
+  
+    <div class="wrapper"><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class="content pure">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#django-admin和manage-py"><span class="toc-text">django-admin和manage.py</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#环境变量配置"><span class="toc-text">环境变量配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用示例"><span class="toc-text">使用示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应用名称"><span class="toc-text">应用名称</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#版本-django-admin-version"><span class="toc-text">版本 django-admin version</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#显示调试输出"><span class="toc-text">显示调试输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可用命令"><span class="toc-text">可用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#check"><span class="toc-text">check</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#compilemessages"><span class="toc-text">compilemessages</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#createcachetable"><span class="toc-text">createcachetable</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dbshell"><span class="toc-text">dbshell</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#diffsettings"><span class="toc-text">diffsettings</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dumpdata"><span class="toc-text">dumpdata</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#flush"><span class="toc-text">flush</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#inspectdb"><span class="toc-text">inspectdb</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#特定于数据库的注释"><span class="toc-text">特定于数据库的注释</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#loaddata"><span class="toc-text">loaddata</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#什么是“夹具”？"><span class="toc-text">什么是“夹具”？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#压缩灯具"><span class="toc-text">压缩灯具</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#特定于数据库的灯具"><span class="toc-text">特定于数据库的灯具</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#从stdin加载灯具"><span class="toc-text">从stdin加载灯具</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#makemessages"><span class="toc-text">makemessages</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#makemigrations"><span class="toc-text">makemigrations</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#migrate"><span class="toc-text">migrate</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#runserver"><span class="toc-text">runserver</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#使用不同端口和地址的示例"><span class="toc-text">使用不同端口和地址的示例</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sendtestemail"><span class="toc-text">sendtestemail</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#shell"><span class="toc-text">shell</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#showmigrations"><span class="toc-text">showmigrations</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sqlflush"><span class="toc-text">sqlflush</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sqlmigrate"><span class="toc-text">sqlmigrate</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sqlsequencereset"><span class="toc-text">sqlsequencereset</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#squashmigrations"><span class="toc-text">squashmigrations</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#startapp"><span class="toc-text">startapp</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#startproject"><span class="toc-text">startproject</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#test"><span class="toc-text">test</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Test-runner-options"><span class="toc-text">Test runner options</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#testserver"><span class="toc-text">testserver</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应用程序提供的命令"><span class="toc-text">应用程序提供的命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#django-contrib-auth"><span class="toc-text">django.contrib.auth</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#changepassword"><span class="toc-text">changepassword</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#createsuperuser"><span class="toc-text">createsuperuser</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#django-contrib-contenttypes"><span class="toc-text">django.contrib.contenttypes</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#remove-stale-contenttypes"><span class="toc-text">remove_stale_contenttypes</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#django-contrib-gis"><span class="toc-text">django.contrib.gis</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ogrinspect"><span class="toc-text">ogrinspect</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#django-contrib-sessions"><span class="toc-text">django.contrib.sessions</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#clearsessions"><span class="toc-text">clearsessions</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#django-contrib-sitemaps"><span class="toc-text">django.contrib.sitemaps</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ping-google"><span class="toc-text">ping_google</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#django-contrib-staticfiles"><span class="toc-text">django.contrib.staticfiles</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#collectstatic"><span class="toc-text">collectstatic</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#自定义被忽略的模式列表"><span class="toc-text">自定义被忽略的模式列表</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#findstatic"><span class="toc-text">findstatic</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#默认选项"><span class="toc-text">默认选项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#额外的细节"><span class="toc-text">额外的细节</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#语法着色"><span class="toc-text">语法着色</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Bash完成"><span class="toc-text">Bash完成</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#从代码运行管理命令"><span class="toc-text">从代码运行管理命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#输出重定向"><span class="toc-text">输出重定向</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="/" class="social fas fa-rss flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="mailto:ju_limeng@126.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://github.com/AngesZhu/" class="social fab fa-github flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://www.cnblogs.com/AngesZhu/" class="social fab fa-code-branch flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://study.163.com/provider/400000000674013/course.htm?share=2&amp;shareId=400000000674013" class="social fas fa-book flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+    </div>
+  
+  <br>
+  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+</div>
+  <div>
+    Use
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Anges's Garden</a>
+    as theme
+    
+      , 
+      total visits
+      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+      times
+    
+    . 
+  </div>
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('.cover') {
+          $('.cover').backstretch(
+          ["https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        } else {
+          $.backstretch(
+          ["https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/app.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "Copied";
+  let COPY_FAILURE = "Copy failed";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
